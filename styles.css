@@ -1,0 +1,139 @@
+/* Your own rules. This file loads AFTER Tailwind and daisyUI, so anything you
+ * write here wins a tie.
+ *
+ * Keep it short. If you are writing a lot of CSS here, check whether a utility
+ * class already does it — that is what Unit 2 was for. The rules below are the
+ * ones utilities genuinely cannot express.
+ */
+
+/* ============================================================ PALETTE
+ *
+ * "…"
+ *
+ * Name the mood in a sentence — "a floodlit field twenty minutes before
+ * kickoff" — then list your colours and the job each one does. A team site
+ * usually has this decided for it already: use the real team colours, and
+ * check the pair you land on against the contrast floor below.
+ *
+ *   primary   #______   the loud one: buttons, the badge, the stat number
+ *   base-100  #______   the page ground
+ *   base-200  #______   sections that step forward from the ground
+ *   accent    #______   a second accent, if you need one at all
+ */
+
+/* Redeclare the theme's slots to make them yours. Everything that asked for
+ * `primary` follows, and you never touch the markup.
+ *
+ * Change `night` to whichever theme you set on <html> — in every page.
+ *
+ * THE TRAP: a school colour is often a dark navy or a deep red, and white text
+ * on it is fine while black text on it is not. `--color-primary-content` is the
+ * text colour that rides on top of `--color-primary`. Set both, together, and
+ * measure the pair.
+ */
+[data-theme='night'] {
+  /* --color-primary: #______; */
+  /* --color-primary-content: #______; */
+  /* --color-accent: #______; */
+}
+
+/* ============================================================ TYPE
+ *
+ * Two faces at most. Team sites lean on a condensed or heavy face for headings
+ * — that is where the shouting lives — and something plain for body text. The
+ * Google Fonts <link> goes in each page's <head>, ABOVE this file.
+ */
+/*
+body { font-family: '______', system-ui, sans-serif; }
+h1, h2, .card-title { font-family: '______', Impact, sans-serif; }
+*/
+
+/* ============================================================ HERO VIDEO
+ *
+ * Four rules, and they are load-bearing. js/hero-video.js explains the order
+ * things load in; this is what makes any of it look like anything.
+ */
+
+/* The stage is the positioning context everything below hangs off.
+ *
+ * NO `overflow: hidden` HERE, and that is deliberate. The oversized video needs
+ * clipping, but .hero-poster below already does that job — it is inset: 0 with
+ * its own overflow: hidden, so the iframe cannot escape it. Putting a second
+ * copy on the stage clips the NEXT GAME card instead, which is the one thing in
+ * this hero that is *supposed* to cross the bottom edge. */
+.hero-stage {
+  position: relative;
+}
+
+/* THE POSTER IS ALWAYS PAINTED. This gradient is the hero when the video is
+ * blocked, still loading, on a phone, or withheld for reduced motion — which
+ * together is most of the time. Design it as if it were the only thing there.
+ * The script adds the video's thumbnail on top of it as a background-image. */
+.hero-poster {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background-color: var(--color-base-300);
+  background-image: linear-gradient(155deg, var(--color-neutral) 0%, var(--color-base-300) 45%, var(--color-primary) 130%);
+  background-size: cover;
+  background-position: center;
+}
+
+/* COVER, not contain. A 16:9 video in a box that is not 16:9 has to overflow in
+ * one direction; these lines pick which. The two `min-` values are the trick —
+ * 177.78vh is 16/9 of the viewport height. */
+.hero-poster iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 56.25vw;
+  min-width: 177.78vh;
+  min-height: 100%;
+  border: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.hero-poster.is-playing iframe {
+  opacity: 1;
+}
+
+/* THE SCRIM is why the headline is readable over moving pictures. Do not
+ * lighten it without measuring: white text needs 4.5:1 against the BRIGHTEST
+ * frame of your video, and a video has a lot of frames. MEASURE THE LIGHTEST
+ * STOP, not an average — this gradient's is the 60% at the top, where white
+ * text over a pure white frame sits at 5.7:1. It reaches 8.5:1 by 40% down and
+ * 17.6:1 at the foot, where the extra weight is carrying the card that
+ * overlaps the edge. */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to bottom, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.7) 40%, rgb(0 0 0 / 0.9));
+}
+
+/* ============================================================ EVERYTHING ELSE */
+
+/* Anchors land below the sticky navbar instead of behind it. If you change the
+ * navbar's height, change this number too. */
+:target {
+  scroll-margin-top: 5rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Some readers' systems ask for less movement — a vestibular condition, or just
+ * a preference. Honour it: no smooth scroll, no fading video in. Keep this. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-poster iframe {
+    transition: none;
+  }
+}

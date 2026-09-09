@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en" data-theme="night">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Clubhouse — change this to your team</title>
+    <meta name="description" content="One sentence about this team. Search results show it; write it." />
+
+    <!--
+      THE THREE TAGS. Tailwind and daisyUI, no build step, nothing installed.
+      Open this file with Live Server and start working.
+
+      Two honest notes:
+        1. The last tag is Tailwind's BROWSER build. Tailwind's own docs say it
+           is "designed for development purposes only, and is not intended for
+           production." Fine while you are building. Unit 8 replaces it with a
+           real built stylesheet, because publishing to a public address is
+           where "development only" stops being acceptable.
+        2. These load from jsdelivr, which means jsdelivr sees a request from
+           every reader of your site. That is your call to make on your own
+           project. Read Unit 8's "what a page costs its reader" first.
+    -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body class="bg-base-100 text-base-content">
+    <!--
+      THEME. data-theme is on <html>, here and on every other page in this
+      folder. Change it in ALL of them or the site restyles itself between
+      clicks, which reads as broken.
+
+      This ships as `night`. A team site wants a theme that can carry one loud
+      colour: try `sunset`, `synthwave`, `dracula`, `forest`, `business`,
+      `dim`, `black`. Do it before you write a word.
+    -->
+
+    <!-- ============================================================== NAV -->
+    <nav class="navbar bg-base-100/80 backdrop-blur sticky top-0 z-30 px-4 md:px-8">
+      <div class="navbar-start gap-3">
+        <!--
+          THE MARK. A monogram in a coloured square is a real logo move and it
+          costs nothing — swap it for the logo package you build in Unit 5.
+        -->
+        <a class="flex items-center gap-3" href="index.html">
+          <span class="grid place-items-center size-9 rounded bg-primary text-primary-content font-black">
+            C
+          </span>
+          <span class="text-lg font-black uppercase tracking-wider">Clubhouse</span>
+        </a>
+      </div>
+      <div class="navbar-end gap-1 md:gap-3">
+        <a class="link link-hover hidden sm:inline" href="schedule.html">Schedule</a>
+        <a class="link link-hover hidden sm:inline" href="roster.html">Roster</a>
+        <a class="btn btn-primary btn-sm md:btn-md" href="schedule.html#tickets">Get tickets</a>
+      </div>
+    </nav>
+
+    <!--
+      ============================================================== HERO
+      A YOUTUBE BACKGROUND with a card sitting on top of it, and the parts are
+      worth understanding before you change them:
+
+        - The gradient behind everything is in styles.css (.hero-poster). It is
+          always painted. If YouTube is blocked on this network — plenty of
+          schools block it — the page still looks deliberate.
+        - js/hero-video.js checks whether YouTube is reachable BEFORE putting an
+          iframe on the page, uses the video's own thumbnail as the poster, then
+          adds the video. It skips the video on phones and for readers whose
+          system asks for reduced motion.
+        - data-video is the id out of a YouTube URL. In
+          youtube.com/watch?v=R6MlUcmOul8 the id is R6MlUcmOul8. Swap it for
+          your own highlight reel, then fix the credit in the footer.
+        - The scrim (.hero-scrim) is what keeps the headline readable over
+          moving pictures. Text on video without one is a coin flip every frame.
+    -->
+    <header class="hero-stage relative min-h-[75vh] md:min-h-[88vh] flex items-end">
+      <div class="hero-poster" data-video="R6MlUcmOul8" data-hero-video></div>
+      <div class="hero-scrim"></div>
+
+      <div class="relative z-10 w-full px-6 pt-32 pb-0 md:pt-40">
+        <div class="max-w-6xl mx-auto">
+          <p class="badge badge-primary badge-lg mb-6 uppercase tracking-widest">20XX season</p>
+          <h1 class="text-5xl md:text-8xl font-black uppercase leading-[0.95] tracking-tight text-white mb-6 max-w-4xl">
+            Your team<br />name here
+          </h1>
+          <p class="text-lg md:text-xl text-white/90 max-w-xl mb-10">
+            One sentence. The sport, the league, the town. Not "a tradition of
+            excellence" — say who you actually play and where.
+          </p>
+
+          <!--
+            THE NEXT GAME CARD overlaps the bottom edge of the hero on purpose.
+            That overlap is the whole visual idea here: one element crossing the
+            boundary between two sections makes a page look designed rather than
+            stacked. -mb-* pulls it down into the section below.
+          -->
+          <div class="card bg-base-100 shadow-2xl max-w-3xl -mb-16 md:-mb-20">
+            <div class="card-body flex-col sm:flex-row sm:items-center gap-6">
+              <div class="flex-1">
+                <p class="text-xs font-bold uppercase tracking-widest text-primary mb-1">Next game</p>
+                <p class="text-2xl font-black">vs. Opponent</p>
+                <!--
+                  <time> with a machine-readable datetime. It costs one
+                  attribute and it is what lets anything else — a search engine,
+                  a calendar, a script you write later — know this is a date.
+                -->
+                <p class="opacity-70">
+                  <time datetime="20XX-10-04T19:00">Friday, October 4 · 7:00pm</time> ·
+                  Home
+                </p>
+              </div>
+              <a class="btn btn-primary btn-lg" href="schedule.html#tickets">Get tickets</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!--
+      ============================================================== RECORD
+      daisyUI's `stats` component. Three numbers, and they should be the three a
+      fan actually asks for. A number nobody asked for is decoration.
+    -->
+    <section class="px-6 pt-28 md:pt-32 pb-20 max-w-6xl mx-auto">
+      <div class="stats stats-vertical sm:stats-horizontal shadow w-full bg-base-200">
+        <div class="stat">
+          <div class="stat-title">Record</div>
+          <div class="stat-value text-primary">0–0</div>
+          <div class="stat-desc">Overall, 20XX</div>
+        </div>
+        <div class="stat">
+          <div class="stat-title">Conference</div>
+          <div class="stat-value">0–0</div>
+          <div class="stat-desc">Where that puts you</div>
+        </div>
+        <div class="stat">
+          <div class="stat-title">Streak</div>
+          <div class="stat-value">W0</div>
+          <div class="stat-desc">Since a date</div>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      ============================================================== FIXTURES
+      Three upcoming games. The full list lives on schedule.html — a home page
+      that tries to be every page ends up being none of them.
+    -->
+    <section class="bg-base-200 border-y border-base-300">
+      <div class="max-w-6xl mx-auto px-6 py-20 md:py-24">
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
+          <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tight">Coming up</h2>
+          <a class="link link-primary font-bold" href="schedule.html">Full schedule</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <article class="card bg-base-100 shadow">
+            <div class="card-body">
+              <p class="text-xs font-bold uppercase tracking-widest opacity-60">Home</p>
+              <h3 class="card-title text-2xl">vs. Opponent</h3>
+              <p class="opacity-70"><time datetime="20XX-10-04T19:00">Oct 4 · 7:00pm</time></p>
+            </div>
+          </article>
+          <article class="card bg-base-100 shadow">
+            <div class="card-body">
+              <p class="text-xs font-bold uppercase tracking-widest opacity-60">Away</p>
+              <h3 class="card-title text-2xl">at Opponent</h3>
+              <p class="opacity-70"><time datetime="20XX-10-11T19:00">Oct 11 · 7:00pm</time></p>
+            </div>
+          </article>
+          <article class="card bg-base-100 shadow">
+            <div class="card-body">
+              <p class="text-xs font-bold uppercase tracking-widest opacity-60">Home</p>
+              <h3 class="card-title text-2xl">vs. Opponent</h3>
+              <p class="opacity-70"><time datetime="20XX-10-18T19:00">Oct 18 · 7:00pm</time></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      ============================================================== STORY
+      Text one side, picture the other. On a phone it stacks with the text
+      first — a picture you have not been told the point of is just a picture.
+    -->
+    <section class="max-w-6xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/30 to-base-300 shadow-xl order-last md:order-first"></div>
+      <div>
+        <p class="text-primary font-bold uppercase tracking-widest text-xs mb-3">The program</p>
+        <h2 class="text-3xl md:text-4xl font-black mb-6">What this team is about</h2>
+        <p class="opacity-70 mb-4">
+          A paragraph about the people. Who coaches, how long they have been
+          here, what they are stubborn about.
+        </p>
+        <p class="opacity-70 mb-8">
+          A second paragraph, shorter. End on something specific — a rivalry, a
+          record, the year everything changed.
+        </p>
+        <a class="btn btn-outline" href="roster.html">Meet the roster</a>
+      </div>
+    </section>
+
+    <!--
+      ============================================================== THE ASK
+      Same ask as the hero, not a new one. A page with two different requests
+      has not decided what it wants.
+    -->
+    <section class="bg-primary text-primary-content px-6 py-20 md:py-24">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-5xl font-black uppercase mb-6">Be there Friday</h2>
+        <p class="opacity-90 mb-8 text-lg">
+          One sentence. Where to park, what it costs, when the doors open.
+        </p>
+        <a class="btn btn-lg" href="schedule.html#tickets">Get tickets</a>
+      </div>
+    </section>
+
+    <!-- ============================================================ FOOTER -->
+    <footer class="footer sm:footer-horizontal bg-base-300 text-base-content px-6 md:px-10 py-12">
+      <nav>
+        <h2 class="footer-title">Pages</h2>
+        <a class="link link-hover" href="index.html">Home</a>
+        <a class="link link-hover" href="schedule.html">Schedule</a>
+        <a class="link link-hover" href="roster.html">Roster</a>
+      </nav>
+      <nav>
+        <h2 class="footer-title">Contact</h2>
+        <a class="link link-hover" href="mailto:coach@example.com">coach@example.com</a>
+        <span class="opacity-70">Your Field, Your City</span>
+      </nav>
+      <aside>
+        <h2 class="footer-title">Credits</h2>
+        <!--
+          EVERY borrowed thing goes here: creator, source, licence. The hero
+          video shipped with this starter is credited below — when you swap the
+          id, swap this line for your own footage's credit. Photographs of
+          minors need more than a credit; ask before you post one.
+        -->
+        <p class="opacity-70 max-w-xs text-sm">
+          Hero video: <em>Tears of Steel</em> by Blender Foundation, CC BY 3.0.
+          Replace it with your own and replace this line with its credit.
+        </p>
+        <p class="opacity-70 text-sm">© 20XX Your team.</p>
+      </aside>
+    </footer>
+
+    <script src="js/hero-video.js"></script>
+  </body>
+</html>

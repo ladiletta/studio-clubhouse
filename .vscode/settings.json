@@ -1,0 +1,80 @@
+{
+  // WHAT THIS FILE IS FOR: a team member who is stuck sends ONE link and
+  // somebody else sees the running site, not a description of it. Everything
+  // below is in service of that, plus the small number of editor defaults that
+  // stop three people's machines from disagreeing about a shared repo.
+
+  // ------------------------------------------------------------ LIVE SERVER
+
+  // A port nobody has to look up. Live Share forwards whatever port a server is
+  // actually on, so this is not what makes sharing work — it is what makes the
+  // address the same on every machine in the room, which is what makes it
+  // sayable out loud.
+  "liveServer.settings.port": 5500,
+
+  // The folder, not a file. This is a MULTI-PAGE site: index.html links to the
+  // other pages by relative path, and they only resolve if the server's root is
+  // the project root.
+  "liveServer.settings.root": "/",
+
+  // The "Server is Started at port 5500" popup, once per launch, on a screen a
+  // beginner is already reading carefully. Nothing is lost by turning it off;
+  // the status bar still says whether the server is up.
+  "liveServer.settings.donotShowInfoMsg": true,
+
+  // Live Server otherwise refuses to start on a file it thinks has unclosed
+  // tags. Half-finished markup is the NORMAL state while you are working, and a
+  // server that will not run until the HTML is already right is a server that
+  // is never there when it is needed.
+  "liveServer.settings.donotVerifyTags": true,
+
+  // ------------------------------------------------------------- LIVE SHARE
+
+  // Share the running server with a guest automatically, so a Live Share
+  // session already has the site in it. Live Share's own default, set here so
+  // it stays true if somebody's global settings say otherwise.
+  "liveshare.autoShareServers": true,
+
+  // Findable. The whole flow starts with somebody locating this control, and
+  // "it is in the status bar" is a thing that can be said across a room.
+  "liveshare.showInStatusBar": "always",
+
+  // Nobody joins without the host saying yes, every time. This is somebody's
+  // own machine and their own files.
+  "liveshare.guestApprovalRequired": true,
+
+  // Off the public listing. A session here is shared by sending its link to one
+  // person.
+  "liveshare.publishWorkspaceInfo": false,
+
+  // ----------------------------------------------------------- THE EDITOR
+
+  // Emmet in HTML without asking for it: `div.card>div.card-body` and Tab is
+  // most of a section.
+  "emmet.triggerExpansionOnTab": true,
+
+  // Two spaces, spaces not tabs, a newline at the end, no trailing whitespace.
+  // These are not taste — they are what stops a diff between two teammates from
+  // being 400 lines of invisible characters when one of them changed a word.
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+
+  // Format on save with VS Code's own built-in HTML and CSS formatters. No
+  // extension needed, and it means the file on disk looks the same no matter
+  // whose laptop last touched it.
+  "editor.formatOnSave": true,
+
+  // Word wrap, because these files have long class lists and a horizontal
+  // scrollbar in a code editor is a way to not read your own code.
+  "editor.wordWrap": "on",
+
+  // The file you opened stays open instead of being replaced by the next one
+  // you click. With three HTML pages that matters immediately.
+  "workbench.editor.enablePreview": false,
+
+  "files.exclude": {
+    "**/.DS_Store": true
+  }
+}

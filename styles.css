@@ -11,8 +11,8 @@
  * "…"
  *
  * Name the mood in a sentence — "a floodlit field twenty minutes before
- * kickoff" — then list your colours and the job each one does. A team site
- * usually has this decided for it already: use the real team colours, and
+ * kickoff" — then list your colors and the job each one does. A team site
+ * usually has this decided for it already: use the real team colors, and
  * check the pair you land on against the contrast floor below.
  *
  *   primary   #______   the loud one: buttons, the badge, the stat number
@@ -26,9 +26,9 @@
  *
  * Change `night` to whichever theme you set on <html> — in every page.
  *
- * THE TRAP: a school colour is often a dark navy or a deep red, and white text
+ * THE TRAP: a school color is often a dark navy or a deep red, and white text
  * on it is fine while black text on it is not. `--color-primary-content` is the
- * text colour that rides on top of `--color-primary`. Set both, together, and
+ * text color that rides on top of `--color-primary`. Set both, together, and
  * measure the pair.
  */
 [data-theme='night'] {
@@ -92,12 +92,20 @@ body {
 
 /* COVER, not contain. A 16:9 video in a box that is not 16:9 has to overflow in
  * one direction; these lines pick which. The two `min-` values are the trick —
- * 177.78vh is 16/9 of the viewport height. */
+ * 177.78vh is 16/9 of the viewport height.
+ *
+ * THE ZOOM pushes the edges of the player out of sight: YouTube's title bar,
+ * its "More videos" strip, and any black bars baked into the video itself.
+ * 1.2 is enough for footage shot 16:9, like this drone shot. A widescreen
+ * film (2.39:1) needs about 1.36. Swap the video, check the edges, set this. */
+.hero-poster {
+  --video-zoom: 1.2;
+}
 .hero-poster iframe {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(var(--video-zoom));
   width: 100vw;
   height: 56.25vw;
   min-width: 177.78vh;
@@ -152,7 +160,7 @@ main:has(#pos-gk:checked) .player:not([data-pos='gk']) {
 }
 
 /* The number panel on each player card: the shirt number, big, on a stripe of
- * the team colour. */
+ * the team color. */
 .player-number {
   background:
     linear-gradient(135deg, transparent 0 55%, color-mix(in oklch, var(--color-primary) 22%, transparent) 55% 70%, transparent 70%),
@@ -172,7 +180,7 @@ main:has(#pos-gk:checked) .player:not([data-pos='gk']) {
 /* The page you are on, marked in the nav by aria-current="page" — which is
  * also what a screen reader announces. daisyUI already paints it as the
  * active item, in the theme's own neutral pair; this only adds weight. Do not
- * recolour the text without measuring it against that neutral: primary on it
+ * recolor the text without measuring it against that neutral: primary on it
  * failed on `corporate`, whose neutral is black. */
 .menu a[aria-current='page'] {
   font-weight: 700;
@@ -201,7 +209,7 @@ html {
 }
 
 /* Some readers' systems ask for less movement — a vestibular condition, or just
- * a preference. Honour it: no smooth scroll, no fading video in, no zooming
+ * a preference. Honor it: no smooth scroll, no fading video in, no zooming
  * photographs. Keep this. */
 @media (prefers-reduced-motion: reduce) {
   html {

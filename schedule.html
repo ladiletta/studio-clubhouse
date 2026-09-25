@@ -5,49 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Schedule — Clubhouse</title>
     <meta name="description" content="Every game this season, and how to get tickets." />
-
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Schedule — Clubhouse" />
+    <meta property="og:description" content="Every game this season, and how to get tickets." />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500..700&family=Inter:wght@400..700&display=swap" rel="stylesheet" />
+
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0f172a" />
     <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body class="bg-base-100 text-base-content">
-    <!--
-      THE NAV IS COPIED, and that is a real cost of plain HTML: three pages,
-      three copies, and they drift. Change one, change all three. Unit 8's build
-      step is the fix; until then, a habit is.
-    -->
-    <nav class="navbar bg-base-100/80 backdrop-blur sticky top-0 z-30 px-4 md:px-8">
-      <div class="navbar-start gap-3">
+    <a class="skip-link btn btn-primary" href="#main">Skip to content</a>
+
+    <nav class="navbar bg-base-100/85 backdrop-blur sticky top-0 z-30 px-4 md:px-8 border-b border-base-content/10" aria-label="Main">
+      <div class="navbar-start">
+        <!--
+          THE MARK. A monogram in a coloured square is a real logo move and it
+          costs nothing — swap it for the logo package you build in Unit 5.
+        -->
         <a class="flex items-center gap-3" href="index.html">
-          <span class="grid place-items-center size-9 rounded bg-primary text-primary-content font-black">C</span>
-          <span class="text-lg font-black uppercase tracking-wider">Clubhouse</span>
+          <span class="grid place-items-center size-10 rounded-lg bg-primary text-primary-content font-display text-xl font-bold">C</span>
+          <span class="font-display text-xl font-bold uppercase tracking-wider">Clubhouse</span>
         </a>
       </div>
-      <div class="navbar-end gap-1 md:gap-3">
-        <a class="link link-hover hidden sm:inline" href="schedule.html" aria-current="page">Schedule</a>
-        <a class="link link-hover hidden sm:inline" href="roster.html">Roster</a>
-        <a class="btn btn-primary btn-sm md:btn-md" href="#tickets">Get tickets</a>
+      <div class="navbar-end gap-2">
+        <ul class="menu menu-horizontal hidden md:flex gap-1 text-base">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="schedule.html" aria-current="page">Schedule</a></li>
+          <li><a href="roster.html">Roster</a></li>
+        </ul>
+        <a class="btn btn-primary btn-sm md:btn-md" href="schedule.html#tickets"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg> Get tickets</a>
+        <details class="dropdown dropdown-end md:hidden">
+          <summary class="btn btn-ghost btn-square" aria-label="Site pages"><svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg></summary>
+          <ul class="menu dropdown-content bg-base-200 rounded-box z-40 mt-3 w-56 p-2 shadow-xl text-base">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="schedule.html" aria-current="page">Schedule</a></li>
+            <li><a href="roster.html">Roster</a></li>
+          </ul>
+        </details>
       </div>
     </nav>
 
     <!--
       A PAGE HEADER, not a second hero. One page gets the big treatment; the
-      rest get a clear title and get on with it. That contrast is what makes the
-      home page feel like the front door.
+      rest get a clear title and get on with it. That contrast is what makes
+      the home page feel like the front door.
     -->
-    <header class="bg-base-200 px-6 py-16 md:py-24 border-b border-base-300">
-      <div class="max-w-5xl mx-auto">
-        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tight mb-4">Schedule</h1>
-        <p class="text-lg opacity-70 max-w-xl">
-          One sentence: which season this is, and when it was last updated. A
-          schedule with no date on it is a schedule nobody trusts.
-        </p>
+    <header class="relative overflow-hidden bg-base-200 py-16 md:py-24 border-b border-base-content/10">
+      <div class="page-header-photo" aria-hidden="true"></div>
+      <div class="relative max-w-5xl mx-auto px-6">
+        <p class="text-primary font-bold uppercase tracking-widest text-xs mb-3">20XX season</p>
+        <h1 class="font-display text-6xl md:text-8xl font-bold uppercase mb-4">Schedule</h1>
+        <p class="text-lg max-w-xl">Every game this season. Home games in bold, results as they come in.</p>
       </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-6 py-16 md:py-24">
+    <main id="main" class="max-w-5xl mx-auto px-6 py-16 md:py-24">
+      <!--
+        THE FILTER HAS NO JAVASCRIPT. Three radio buttons dressed as a button
+        group, and one rule in styles.css: when #show-home is checked, hide
+        every row marked data-venue="away". That is :has(), and it is how a
+        stylesheet can react to a click. Give every new row its data-venue.
+      -->
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <h2 class="font-display text-3xl font-bold uppercase">Games</h2>
+        <fieldset class="join">
+          <legend class="sr-only">Show</legend>
+          <input class="join-item btn btn-sm" type="radio" name="venue" id="show-all" aria-label="All games" checked />
+          <input class="join-item btn btn-sm" type="radio" name="venue" id="show-home" aria-label="Home" />
+          <input class="join-item btn btn-sm" type="radio" name="venue" id="show-away" aria-label="Away" />
+        </fieldset>
+      </div>
+
       <!--
         A REAL TABLE, because this is real tabular data — same columns, many
         rows, and a reader who scans down one column. <th scope="col"> is what
@@ -57,120 +93,236 @@
         overflow-x-auto is the phone fix: the TABLE scrolls sideways inside its
         box instead of the whole page doing it.
       -->
-      <div class="overflow-x-auto">
-        <table class="table table-zebra">
+      <div class="overflow-x-auto rounded-box border border-base-content/10">
+        <table class="table text-base">
           <caption class="sr-only">20XX season schedule</caption>
-          <thead>
+          <thead class="bg-base-200 text-base-content">
             <tr>
               <th scope="col">Date</th>
               <th scope="col">Opponent</th>
               <th scope="col">Where</th>
-              <th scope="col">Result</th>
+              <th scope="col" class="text-right">Result</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row" class="font-normal">
-                <time datetime="20XX-09-06T19:00">Sep 6</time>
-              </th>
-              <td>Opponent</td>
+            <tr data-venue="home" class="font-bold">
+              <th scope="row"><time datetime="20XX-09-06T19:00">Sep 6</time></th>
+              <td>vs. Opponent</td>
               <td>Home</td>
-              <td><span class="badge badge-success badge-sm">W 00–00</span></td>
+              <td class="text-right"><span class="badge badge-success">W 00–00</span></td>
             </tr>
-            <tr>
-              <th scope="row" class="font-normal">
-                <time datetime="20XX-09-13T19:00">Sep 13</time>
-              </th>
-              <td>Opponent</td>
+            <tr data-venue="away">
+              <th scope="row" class="font-normal"><time datetime="20XX-09-13T19:00">Sep 13</time></th>
+              <td>at Opponent</td>
               <td>Away</td>
-              <td><span class="badge badge-error badge-sm">L 00–00</span></td>
+              <td class="text-right"><span class="badge badge-success">W 00–00</span></td>
             </tr>
-            <tr>
-              <th scope="row" class="font-normal">
-                <time datetime="20XX-10-04T19:00">Oct 4</time>
-              </th>
-              <td>Opponent</td>
-              <td>Home</td>
-              <td class="opacity-60">7:00pm</td>
-            </tr>
-            <tr>
-              <th scope="row" class="font-normal">
-                <time datetime="20XX-10-11T19:00">Oct 11</time>
-              </th>
-              <td>Opponent</td>
+            <tr data-venue="away">
+              <th scope="row" class="font-normal"><time datetime="20XX-09-20T19:00">Sep 20</time></th>
+              <td>at Opponent</td>
               <td>Away</td>
-              <td class="opacity-60">7:00pm</td>
+              <td class="text-right"><span class="badge badge-error">L 00–00</span></td>
             </tr>
-            <tr>
-              <th scope="row" class="font-normal">
-                <time datetime="20XX-10-18T19:00">Oct 18</time>
-              </th>
-              <td>Opponent</td>
+            <tr data-venue="home" class="font-bold">
+              <th scope="row"><time datetime="20XX-09-27T19:00">Sep 27</time></th>
+              <td>vs. Opponent</td>
               <td>Home</td>
-              <td class="opacity-60">7:00pm</td>
+              <td class="text-right"><span class="badge badge-success">W 00–00</span></td>
+            </tr>
+            <tr data-venue="home" class="font-bold bg-primary/10">
+              <th scope="row"><time datetime="20XX-10-04T19:00">Oct 4</time></th>
+              <td>vs. Opponent <span class="badge badge-primary badge-sm ml-1">Next</span></td>
+              <td>Home</td>
+              <td class="text-right">7:00pm</td>
+            </tr>
+            <tr data-venue="away">
+              <th scope="row" class="font-normal"><time datetime="20XX-10-11T19:00">Oct 11</time></th>
+              <td>at Opponent</td>
+              <td>Away</td>
+              <td class="text-right">7:00pm</td>
+            </tr>
+            <tr data-venue="home" class="font-bold">
+              <th scope="row"><time datetime="20XX-10-18T19:00">Oct 18</time></th>
+              <td>vs. Opponent</td>
+              <td>Home</td>
+              <td class="text-right">7:00pm</td>
+            </tr>
+            <tr data-venue="away">
+              <th scope="row" class="font-normal"><time datetime="20XX-10-25T19:00">Oct 25</time></th>
+              <td>at Opponent</td>
+              <td>Away</td>
+              <td class="text-right">7:00pm</td>
             </tr>
           </tbody>
         </table>
       </div>
 
       <!--
-        A COLOUR-ONLY BADGE IS NOT ENOUGH. The win and loss badges above say
-        "W" and "L" as well as being green and red, because about one boy in
-        twelve cannot tell those two colours apart. Keep the letter.
+        ============================================================ TICKETS
+        Three tiers, parallel. The middle one is marked as the usual choice —
+        that is a real pricing-page move, and it only works if it is true.
       -->
-
-      <section id="tickets" class="mt-20">
-        <h2 class="text-3xl font-black uppercase mb-6">Tickets</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="card bg-base-200">
-            <div class="card-body">
-              <h3 class="card-title">Students</h3>
-              <p class="text-3xl font-black text-primary">$0</p>
-              <p class="opacity-70">What ID they need, if any.</p>
-            </div>
-          </div>
-          <div class="card bg-base-200">
-            <div class="card-body">
-              <h3 class="card-title">General</h3>
-              <p class="text-3xl font-black text-primary">$0</p>
-              <p class="opacity-70">At the gate, or in advance.</p>
-            </div>
-          </div>
-          <div class="card bg-base-200">
-            <div class="card-body">
-              <h3 class="card-title">Season</h3>
-              <p class="text-3xl font-black text-primary">$00</p>
-              <p class="opacity-70">How many games that covers.</p>
-            </div>
-          </div>
-        </div>
-        <p class="opacity-70 mt-6">
+      <section id="tickets" class="mt-24">
+        <h2 class="font-display text-4xl font-bold uppercase mb-2">Tickets</h2>
+        <p class="opacity-80 mb-10 max-w-2xl">
           One sentence about where tickets actually come from — a link, a table
           by the gate, a phone number. This starter does not know, so you have
           to say.
         </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+          <div class="card bg-base-200">
+            <div class="card-body">
+              <h3 class="card-title uppercase font-display text-2xl">Students</h3>
+              <p class="font-display text-5xl font-bold">$0</p>
+              <ul class="space-y-2 my-4">
+                <li class="flex gap-2"><svg class="size-5 text-primary shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> What ID they need, if any</li>
+                <li class="flex gap-2"><svg class="size-5 text-primary shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Which section they sit in</li>
+              </ul>
+              <a class="btn btn-outline mt-auto" href="mailto:coach@example.com">Ask about student tickets</a>
+            </div>
+          </div>
+          <div class="card bg-base-200 ring-2 ring-primary relative">
+            <span class="badge badge-primary absolute -top-3 left-1/2 -translate-x-1/2">Most fans</span>
+            <div class="card-body">
+              <h3 class="card-title uppercase font-display text-2xl">General</h3>
+              <p class="font-display text-5xl font-bold text-primary">$0</p>
+              <ul class="space-y-2 my-4">
+                <li class="flex gap-2"><svg class="size-5 text-primary shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> At the gate, or in advance</li>
+                <li class="flex gap-2"><svg class="size-5 text-primary shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Cash, card, or both</li>
+              </ul>
+              <a class="btn btn-primary mt-auto" href="mailto:coach@example.com">Buy general admission</a>
+            </div>
+          </div>
+          <div class="card bg-base-200">
+            <div class="card-body">
+              <h3 class="card-title uppercase font-display text-2xl">Season</h3>
+              <p class="font-display text-5xl font-bold">$00</p>
+              <ul class="space-y-2 my-4">
+                <li class="flex gap-2"><svg class="size-5 text-primary shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> How many games that covers</li>
+                <li class="flex gap-2"><svg class="size-5 text-primary shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Anything else it gets you</li>
+              </ul>
+              <a class="btn btn-outline mt-auto" href="mailto:coach@example.com">Ask about a season pass</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!--
+        ============================================================ VENUE
+        Same OpenStreetMap embed the other starters use: free, no key. To move
+        the pin, find the field at openstreetmap.org, press Share, tick
+        "Include marker", choose HTML and paste the src here.
+      -->
+      <section id="venue" class="mt-24 grid grid-cols-1 md:grid-cols-5 gap-10 items-start">
+        <div class="md:col-span-2">
+          <h2 class="font-display text-4xl font-bold uppercase mb-6">The venue</h2>
+          <address class="not-italic text-lg leading-relaxed mb-6">
+            Your Field<br />
+            123 Your Street<br />
+            Your City, ST 00000
+          </address>
+          <ul class="space-y-4">
+            <li class="flex gap-3"><svg class="size-5 text-primary shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg> <span><strong>Parking.</strong> <span class="opacity-80">Where, and whether it fills up.</span></span></li>
+            <li class="flex gap-3"><svg class="size-5 text-primary shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> <span><strong>Gates.</strong> <span class="opacity-80">How long before kickoff they open.</span></span></li>
+            <li class="flex gap-3"><svg class="size-5 text-primary shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="4" r="1"/><path d="m18 19 1-7-6 1"/><path d="m5 8 3-3 5.5 3-2.36 3.5"/><path d="M4.24 14.5a5 5 0 0 0 6.88 6"/><path d="M13.76 17.5a5 5 0 0 0-6.88-6"/></svg> <span><strong>Access.</strong> <span class="opacity-80">Where step-free seating is.</span></span></li>
+          </ul>
+        </div>
+        <div class="md:col-span-3">
+          <div class="rounded-box overflow-hidden border border-base-content/10 aspect-[16/10] bg-base-200">
+            <iframe class="size-full" title="Map showing the home field" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-81.7005%2C41.4965%2C-81.6870%2C41.5025&amp;layer=mapnik&amp;marker=41.4995%2C-81.6937"></iframe>
+          </div>
+          <p class="mt-3 text-sm"><a class="link" href="https://www.openstreetmap.org/?mlat=41.4995&amp;mlon=-81.6937#map=17/41.4995/-81.6937">Open the map full size</a></p>
+        </div>
       </section>
     </main>
 
-    <footer class="footer sm:footer-horizontal bg-base-300 text-base-content px-6 md:px-10 py-12">
-      <nav>
-        <h2 class="footer-title">Pages</h2>
-        <a class="link link-hover" href="index.html">Home</a>
-        <a class="link link-hover" href="schedule.html">Schedule</a>
-        <a class="link link-hover" href="roster.html">Roster</a>
-      </nav>
-      <nav>
-        <h2 class="footer-title">Contact</h2>
-        <a class="link link-hover" href="mailto:coach@example.com">coach@example.com</a>
-        <span class="opacity-70">Your Field, Your City</span>
-      </nav>
-      <aside>
-        <h2 class="footer-title">Credits</h2>
-        <p class="opacity-70 max-w-xs text-sm">
-          Every image, its creator, source and licence. This page has none yet.
-        </p>
-        <p class="opacity-70 text-sm">© 20XX Your team.</p>
-      </aside>
+    <!--
+      SPONSORS. Names, not grey rectangles labelled "logo". If the team has
+      none, delete the band — an empty "our partners" row reads as a team
+      nobody backs.
+    -->
+    <section class="bg-base-200 border-y border-base-content/10" aria-label="Sponsors">
+      <div class="max-w-6xl mx-auto px-6 py-8 flex flex-wrap items-center justify-center gap-x-12 gap-y-4">
+        <h2 class="text-xs font-bold uppercase tracking-widest w-full sm:w-auto text-center">With thanks to</h2>
+        <span class="font-display text-xl font-bold uppercase opacity-80">Sponsor One</span>
+        <span class="font-display text-xl font-bold uppercase opacity-80">Sponsor Two</span>
+        <span class="font-display text-xl font-bold uppercase opacity-80">Sponsor Three</span>
+        <span class="font-display text-xl font-bold uppercase opacity-80">Sponsor Four</span>
+      </div>
+    </section>
+
+    <footer class="bg-base-300 text-base-content">
+      <div class="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div>
+          <a class="flex items-center gap-3" href="index.html">
+            <span class="grid place-items-center size-10 rounded-lg bg-primary text-primary-content font-display text-xl font-bold">C</span>
+            <span class="font-display text-xl font-bold uppercase tracking-wider">Clubhouse</span>
+          </a>
+          <p class="mt-4 opacity-80 max-w-xs">The sport, the league, the town. One line.</p>
+          <div class="flex gap-2 mt-5">
+            <!-- A social link needs a name a screen reader can say. The icon is not one. -->
+            <a class="btn btn-ghost btn-square btn-sm" href="https://www.instagram.com/" aria-label="Instagram"><svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+            <a class="btn btn-ghost btn-square btn-sm" href="https://www.youtube.com/" aria-label="YouTube"><svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg></a>
+          </div>
+        </div>
+        <nav aria-label="Footer">
+          <h2 class="footer-title">Pages</h2>
+          <ul class="space-y-2">
+            <li><a class="link link-hover" href="index.html">Home</a></li>
+            <li><a class="link link-hover" href="schedule.html">Schedule</a></li>
+            <li><a class="link link-hover" href="roster.html">Roster</a></li>
+            <li><a class="link link-hover" href="schedule.html#tickets">Tickets</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h2 class="footer-title">Contact</h2>
+          <address class="not-italic space-y-2">
+            <p><a class="link link-hover" href="mailto:coach@example.com">coach@example.com</a></p>
+            <p><a class="link link-hover" href="schedule.html#venue">Your Field, Your City</a></p>
+          </address>
+        </div>
+        <!--
+          THE SIGNUP. data-demo means js/site.js catches it and says thank you
+          instead of sending it anywhere. Point `action` at a real service and
+          remove data-demo, or delete this block.
+        -->
+        <form data-demo>
+          <h2 class="footer-title">Game-day reminders</h2>
+          <label class="sr-only" for="news-email">Email address</label>
+          <div class="join w-full">
+            <input class="input join-item w-full" type="email" id="news-email" name="email" required autocomplete="email" placeholder="you@example.com" />
+            <button class="btn btn-primary join-item" type="submit">Sign up</button>
+          </div>
+          <p class="text-sm opacity-80 mt-2">The day before every home game.</p>
+          <p data-sent hidden role="status" tabindex="-1" class="text-sm mt-2 font-semibold">Thanks — see you Friday.</p>
+        </form>
+      </div>
+
+      <!--
+        CREDITS. Every borrowed thing: creator, source, licence, and what you
+        changed. One list for the whole site, the same on every page. When you
+        swap a picture, swap its line. Photographs of minors need more than a
+        credit; ask before you post one.
+      -->
+      <div class="border-t border-base-content/10">
+        <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row md:items-start md:justify-between gap-4 text-sm">
+          <p class="opacity-80">© <span data-year>20XX</span> Your team. Built with daisyUI and Tailwind CSS; icons by Lucide.</p>
+          <details class="md:max-w-xl">
+            <summary class="cursor-pointer link link-hover opacity-80">Photo and video credits</summary>
+            <ul class="mt-3 space-y-1 opacity-80">
+              <li>Hero video: <a class="link" href="https://mango.blender.org/"><em>Tears of Steel</em></a> by Blender Foundation, <a class="link" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</li>
+              <li>Night game: <a class="link" href="https://commons.wikimedia.org/wiki/File:A_night_game_at_Duane_Stadium_at_Merrimack_College.jpg">Kenneth C. Zirkel</a>, Wikimedia Commons, <a class="link" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Cropped.</li>
+              <li>Crowd: <a class="link" href="https://commons.wikimedia.org/wiki/File:Peden_Stadium_at_Night.jpg">NotJamestack</a>, Wikimedia Commons, <a class="link" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Cropped.</li>
+              <li>Ball: <a class="link" href="https://commons.wikimedia.org/wiki/File:Adidas_soccer_ball_on_a_grass_pitch_(Unsplash).jpg">Peter Glaser baraida</a>, Wikimedia Commons, <a class="link" href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>. Cropped.</li>
+              <li>Field: <a class="link" href="https://commons.wikimedia.org/wiki/File:Scudamore_Field_at_NKU_Soccer_Stadium_2024.jpg">Kithira</a>, Wikimedia Commons, <a class="link" href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>. Cropped.</li>
+              <li>Floodlights: <a class="link" href="https://commons.wikimedia.org/wiki/File:Champasak_Stadium_during_at_night_22Jan2026.jpg">AddedUpdatePoster</a>, Wikimedia Commons, <a class="link" href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>. Cropped.</li>
+              <li>Map: © <a class="link" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.</li>
+            </ul>
+          </details>
+        </div>
+      </div>
     </footer>
+
+    <script src="js/site.js"></script>
   </body>
 </html>

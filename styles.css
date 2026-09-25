@@ -39,14 +39,20 @@
 
 /* ============================================================ TYPE
  *
- * Two faces at most. Team sites lean on a condensed or heavy face for headings
- * — that is where the shouting lives — and something plain for body text. The
- * Google Fonts <link> goes in each page's <head>, ABOVE this file.
+ * Two faces at most. Team sites lean on a condensed, heavy face for headings —
+ * that is where the shouting lives — and something plain for body text. This
+ * starter ships Oswald over Inter, both free under the SIL Open Font License.
+ *
+ * To change them: pick two at fonts.google.com, replace the Google Fonts
+ * <link> in the <head> of EVERY page, then the two names below.
  */
-/*
-body { font-family: '______', system-ui, sans-serif; }
-h1, h2, .card-title { font-family: '______', Impact, sans-serif; }
-*/
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.font-display,
+.card-title {
+  font-family: 'Oswald', Impact, sans-serif;
+}
 
 /* ============================================================ HERO VIDEO
  *
@@ -65,19 +71,23 @@ h1, h2, .card-title { font-family: '______', Impact, sans-serif; }
   position: relative;
 }
 
-/* THE POSTER IS ALWAYS PAINTED. This gradient is the hero when the video is
+/* THE POSTER IS ALWAYS PAINTED. This photograph is the hero when the video is
  * blocked, still loading, on a phone, or withheld for reduced motion — which
  * together is most of the time. Design it as if it were the only thing there.
- * The script adds the video's thumbnail on top of it as a background-image. */
+ * The gradient underneath shows while the photograph downloads.
+ *
+ * Swap the video? Swap this picture too, for a still from the same footage,
+ * so the fade from one to the other reads as one thing. */
 .hero-poster {
   position: absolute;
   inset: 0;
   z-index: 0;
   overflow: hidden;
   background-color: var(--color-base-300);
-  background-image: linear-gradient(155deg, var(--color-neutral) 0%, var(--color-base-300) 45%, var(--color-primary) 130%);
+  background-image: url('img/stadium-night.jpg'),
+    linear-gradient(155deg, var(--color-neutral) 0%, var(--color-base-300) 45%, var(--color-primary) 130%);
   background-size: cover;
-  background-position: center;
+  background-position: center 40%;
 }
 
 /* COVER, not contain. A 16:9 video in a box that is not 16:9 has to overflow in
@@ -115,11 +125,74 @@ h1, h2, .card-title { font-family: '______', Impact, sans-serif; }
   background: linear-gradient(to bottom, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.7) 40%, rgb(0 0 0 / 0.9));
 }
 
+/* The other pages' headers carry the same photograph, faded almost to
+ * nothing. Enough to say "same team", not enough to fight the title. */
+.page-header-photo {
+  position: absolute;
+  inset: 0;
+  background: url('img/stadium-night.jpg') center 40% / cover;
+  opacity: 0.12;
+}
+
+/* ============================================================ FILTERS
+ *
+ * The schedule's Home/Away buttons and the roster's positions. Each is a set
+ * of radio buttons; :has() lets a rule ask "is that radio checked?" and hide
+ * things elsewhere on the page. No JavaScript, and the buttons still work with
+ * a keyboard because they are real form controls. */
+main:has(#show-home:checked) tr[data-venue='away'],
+main:has(#show-away:checked) tr[data-venue='home'] {
+  display: none;
+}
+main:has(#pos-fwd:checked) .player:not([data-pos='fwd']),
+main:has(#pos-mid:checked) .player:not([data-pos='mid']),
+main:has(#pos-def:checked) .player:not([data-pos='def']),
+main:has(#pos-gk:checked) .player:not([data-pos='gk']) {
+  display: none;
+}
+
+/* The number panel on each player card: the shirt number, big, on a stripe of
+ * the team colour. */
+.player-number {
+  background:
+    linear-gradient(135deg, transparent 0 55%, color-mix(in oklch, var(--color-primary) 22%, transparent) 55% 70%, transparent 70%),
+    linear-gradient(to bottom right, var(--color-base-300), var(--color-neutral));
+}
+
 /* ============================================================ EVERYTHING ELSE */
+
+/* FOOTER HEADINGS AT FULL STRENGTH. daisyUI fades `.footer-title` to 60%. On
+ * `night` that measured 4.80:1 — a pass by a hair, and the first thing to fail
+ * when you change the theme (on `coffee` it is 3.48:1). Unfaded it is 11.6:1.
+ * The capitals and the letter-spacing already say "this is a label". */
+.footer-title {
+  opacity: 1;
+}
+
+/* The page you are on, marked in the nav by aria-current="page" — which is
+ * also what a screen reader announces. daisyUI already paints it as the
+ * active item, in the theme's own neutral pair; this only adds weight. Do not
+ * recolour the text without measuring it against that neutral: primary on it
+ * failed on `corporate`, whose neutral is black. */
+.menu a[aria-current='page'] {
+  font-weight: 700;
+}
+
+/* SKIP LINK. The first thing a keyboard user reaches, and invisible until
+ * they do. It jumps past the nav to <main id="main">. Keep it. */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -5rem;
+  z-index: 50;
+}
+.skip-link:focus {
+  top: 1rem;
+}
 
 /* Anchors land below the sticky navbar instead of behind it. If you change the
  * navbar's height, change this number too. */
-:target {
+[id] {
   scroll-margin-top: 5rem;
 }
 
@@ -128,12 +201,18 @@ html {
 }
 
 /* Some readers' systems ask for less movement — a vestibular condition, or just
- * a preference. Honour it: no smooth scroll, no fading video in. Keep this. */
+ * a preference. Honour it: no smooth scroll, no fading video in, no zooming
+ * photographs. Keep this. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .hero-poster iframe {
-    transition: none;
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+  .group:hover img {
+    transform: none;
   }
 }

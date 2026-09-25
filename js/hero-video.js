@@ -2,19 +2,19 @@
 //
 // The order matters, and each step exists because the step before it can fail:
 //
-//   1. The gradient in styles.css (.hero-poster) is always painted. Nothing
-//      here has to succeed for the hero to look deliberate.
-//   2. We load the video's THUMBNAIL first. It is a plain image, so we get an
-//      onerror we can act on — which makes it both the poster and the honest
-//      test of "can this network reach YouTube at all?" A school filter that
-//      blocks YouTube blocks its image host too.
+//   1. The photograph in styles.css (.hero-poster) is always painted. Nothing
+//      here has to succeed for the hero to look finished.
+//   2. We load the video's THUMBNAIL first — not to show it, but because it is
+//      a plain image, so we get an onerror we can act on. That makes it the
+//      honest test of "can this network reach YouTube at all?" A school
+//      filter that blocks YouTube blocks its image host too.
 //   3. Only if that image loads do we put an <iframe> on the page. An iframe
 //      gives you no usable way to ask whether it worked, so we never guess:
 //      by the time it exists we already know the answer.
 //
 // Two deliberate refusals: no video on a phone (it is a lot of somebody's data
 // for decoration), and no video for a reader whose system asks for reduced
-// motion. Both keep the poster, which is the same picture standing still.
+// motion. Both keep the photograph, which is the hero standing still.
 
 (function () {
   const stage = document.querySelector('[data-hero-video]');
@@ -26,17 +26,13 @@
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const narrow = window.matchMedia('(max-width: 767px)').matches;
 
-  // The poster runs on phones too — it is one image, and it is the picture the
-  // headline sits on. Only the moving version is withheld.
-  const poster = new Image();
-  poster.onload = function () {
-    stage.style.backgroundImage = `url(${poster.src})`;
-    stage.classList.add('has-poster');
-    if (reduced || narrow) return;
-    addVideo();
-  };
-  // No handler needed for failure: the gradient is already on the page.
-  poster.src = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+  // Nothing to test for a reader who will not get the video anyway.
+  if (reduced || narrow) return;
+
+  const probe = new Image();
+  probe.onload = addVideo;
+  // No handler needed for failure: the photograph is already on the page.
+  probe.src = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
 
   function addVideo() {
     const params = new URLSearchParams({

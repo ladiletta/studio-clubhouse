@@ -4,184 +4,314 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Roster — Clubhouse</title>
-    <meta name="description" content="Who plays, who coaches, and what they do." />
-
+    <meta name="description" content="The players and coaches this season." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Roster — Clubhouse" />
+    <meta property="og:description" content="The players and coaches this season." />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500..700&family=Inter:wght@400..700&display=swap" rel="stylesheet" />
+
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0f172a" />
     <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body class="bg-base-100 text-base-content">
-    <nav class="navbar bg-base-100/80 backdrop-blur sticky top-0 z-30 px-4 md:px-8">
-      <div class="navbar-start gap-3">
+    <a class="skip-link btn btn-primary" href="#main">Skip to content</a>
+
+    <nav class="navbar bg-base-100/85 backdrop-blur sticky top-0 z-30 px-4 md:px-8 border-b border-base-content/10" aria-label="Main">
+      <div class="navbar-start">
+        <!--
+          THE MARK. A monogram in a coloured square is a real logo move and it
+          costs nothing — swap it for the logo package you build in Unit 5.
+        -->
         <a class="flex items-center gap-3" href="index.html">
-          <span class="grid place-items-center size-9 rounded bg-primary text-primary-content font-black">C</span>
-          <span class="text-lg font-black uppercase tracking-wider">Clubhouse</span>
+          <span class="grid place-items-center size-10 rounded-lg bg-primary text-primary-content font-display text-xl font-bold">C</span>
+          <span class="font-display text-xl font-bold uppercase tracking-wider">Clubhouse</span>
         </a>
       </div>
-      <div class="navbar-end gap-1 md:gap-3">
-        <a class="link link-hover hidden sm:inline" href="schedule.html">Schedule</a>
-        <a class="link link-hover hidden sm:inline" href="roster.html" aria-current="page">Roster</a>
-        <a class="btn btn-primary btn-sm md:btn-md" href="schedule.html#tickets">Get tickets</a>
+      <div class="navbar-end gap-2">
+        <ul class="menu menu-horizontal hidden md:flex gap-1 text-base">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="roster.html" aria-current="page">Roster</a></li>
+        </ul>
+        <a class="btn btn-primary btn-sm md:btn-md" href="schedule.html#tickets"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg> Get tickets</a>
+        <details class="dropdown dropdown-end md:hidden">
+          <summary class="btn btn-ghost btn-square" aria-label="Site pages"><svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg></summary>
+          <ul class="menu dropdown-content bg-base-200 rounded-box z-40 mt-3 w-56 p-2 shadow-xl text-base">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="roster.html" aria-current="page">Roster</a></li>
+          </ul>
+        </details>
       </div>
     </nav>
 
-    <header class="bg-base-200 px-6 py-16 md:py-24 border-b border-base-300">
-      <div class="max-w-6xl mx-auto">
-        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tight mb-4">Roster</h1>
-        <p class="text-lg opacity-70 max-w-xl">
-          One sentence. How many, what year, and anything a visitor needs to
-          know to read the list.
-        </p>
+    <header class="relative overflow-hidden bg-base-200 py-16 md:py-24 border-b border-base-content/10">
+      <div class="page-header-photo" aria-hidden="true"></div>
+      <div class="relative max-w-6xl mx-auto px-6">
+        <p class="text-primary font-bold uppercase tracking-widest text-xs mb-3">20XX season</p>
+        <h1 class="font-display text-6xl md:text-8xl font-bold uppercase mb-4">Roster</h1>
+        <p class="text-lg max-w-xl">One sentence about this year's squad. How many, how young, what is new.</p>
       </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+    <main id="main" class="max-w-6xl mx-auto px-6 py-16 md:py-24">
       <!--
         BEFORE YOU PUT REAL FACES HERE. A photograph of somebody under 18 on a
         public website is not a design decision. Ask them, ask the school, and
         if either answer is no, use the number instead of the face — which is
         what these cards do already, and they look fine.
       -->
-      <section class="mb-20">
-        <h2 class="text-2xl font-black uppercase tracking-wide mb-8">Players</h2>
+      <section class="mb-24">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+          <h2 class="font-display text-4xl font-bold uppercase">Players</h2>
+          <!--
+            THE SAME NO-JAVASCRIPT FILTER as the schedule's: radio buttons, and
+            :has() rules in styles.css that hide every card whose data-pos does
+            not match. These are soccer positions — rename them for your sport,
+            here AND in styles.css AND in each card's data-pos.
+          -->
+          <fieldset class="flex flex-wrap gap-2">
+            <legend class="sr-only">Show position</legend>
+            <input class="btn btn-sm" type="radio" name="pos" id="pos-all" aria-label="Everyone" checked />
+            <input class="btn btn-sm" type="radio" name="pos" id="pos-fwd" aria-label="Forwards" />
+            <input class="btn btn-sm" type="radio" name="pos" id="pos-mid" aria-label="Midfield" />
+            <input class="btn btn-sm" type="radio" name="pos" id="pos-def" aria-label="Defense" />
+            <input class="btn btn-sm" type="radio" name="pos" id="pos-gk" aria-label="Keepers" />
+          </fieldset>
+        </div>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
           <!--
             ONE CARD, REPEATED. Get the first one right, then copy it. If you
-            find yourself changing five cards by hand to try a layout, you have
-            found the reason Unit 8 introduces a build step.
+            find yourself changing eight cards by hand to try a layout, you
+            have found the reason Unit 8 introduces a build step.
+            data-pos is what the filter above reads.
           -->
-          <article class="card bg-base-200 shadow">
-            <div class="aspect-square grid place-items-center bg-gradient-to-br from-primary/25 to-base-300">
-              <span class="text-5xl font-black opacity-80">00</span>
+          <article class="player card bg-base-200 overflow-hidden" data-pos="fwd">
+            <div class="player-number aspect-square grid place-items-center">
+              <span class="font-display text-7xl font-bold">7</span>
             </div>
-            <div class="card-body p-4">
-              <h3 class="font-bold">A name</h3>
-              <p class="opacity-60 text-sm">Position · Year</p>
-            </div>
-          </article>
-
-          <article class="card bg-base-200 shadow">
-            <div class="aspect-square grid place-items-center bg-gradient-to-br from-primary/25 to-base-300">
-              <span class="text-5xl font-black opacity-80">00</span>
-            </div>
-            <div class="card-body p-4">
-              <h3 class="font-bold">A name</h3>
-              <p class="opacity-60 text-sm">Position · Year</p>
+            <div class="card-body p-4 gap-1">
+              <h3 class="font-bold text-lg">A name</h3>
+              <p class="text-sm opacity-80">Forward · Senior</p>
             </div>
           </article>
-
-          <article class="card bg-base-200 shadow">
-            <div class="aspect-square grid place-items-center bg-gradient-to-br from-primary/25 to-base-300">
-              <span class="text-5xl font-black opacity-80">00</span>
+          <article class="player card bg-base-200 overflow-hidden" data-pos="fwd">
+            <div class="player-number aspect-square grid place-items-center">
+              <span class="font-display text-7xl font-bold">9</span>
             </div>
-            <div class="card-body p-4">
-              <h3 class="font-bold">A name</h3>
-              <p class="opacity-60 text-sm">Position · Year</p>
-            </div>
-          </article>
-
-          <article class="card bg-base-200 shadow">
-            <div class="aspect-square grid place-items-center bg-gradient-to-br from-primary/25 to-base-300">
-              <span class="text-5xl font-black opacity-80">00</span>
-            </div>
-            <div class="card-body p-4">
-              <h3 class="font-bold">A name</h3>
-              <p class="opacity-60 text-sm">Position · Year</p>
+            <div class="card-body p-4 gap-1">
+              <h3 class="font-bold text-lg">A name</h3>
+              <p class="text-sm opacity-80">Forward · Junior</p>
             </div>
           </article>
-
-          <article class="card bg-base-200 shadow">
-            <div class="aspect-square grid place-items-center bg-gradient-to-br from-primary/25 to-base-300">
-              <span class="text-5xl font-black opacity-80">00</span>
+          <article class="player card bg-base-200 overflow-hidden" data-pos="mid">
+            <div class="player-number aspect-square grid place-items-center">
+              <span class="font-display text-7xl font-bold">10</span>
             </div>
-            <div class="card-body p-4">
-              <h3 class="font-bold">A name</h3>
-              <p class="opacity-60 text-sm">Position · Year</p>
-            </div>
-          </article>
-
-          <article class="card bg-base-200 shadow">
-            <div class="aspect-square grid place-items-center bg-gradient-to-br from-primary/25 to-base-300">
-              <span class="text-5xl font-black opacity-80">00</span>
-            </div>
-            <div class="card-body p-4">
-              <h3 class="font-bold">A name</h3>
-              <p class="opacity-60 text-sm">Position · Year</p>
+            <div class="card-body p-4 gap-1">
+              <h3 class="font-bold text-lg">A name</h3>
+              <p class="text-sm opacity-80">Midfield · Senior</p>
             </div>
           </article>
-
-          <article class="card bg-base-200 shadow">
-            <div class="aspect-square grid place-items-center bg-gradient-to-br from-primary/25 to-base-300">
-              <span class="text-5xl font-black opacity-80">00</span>
+          <article class="player card bg-base-200 overflow-hidden" data-pos="mid">
+            <div class="player-number aspect-square grid place-items-center">
+              <span class="font-display text-7xl font-bold">8</span>
             </div>
-            <div class="card-body p-4">
-              <h3 class="font-bold">A name</h3>
-              <p class="opacity-60 text-sm">Position · Year</p>
+            <div class="card-body p-4 gap-1">
+              <h3 class="font-bold text-lg">A name</h3>
+              <p class="text-sm opacity-80">Midfield · Sophomore</p>
             </div>
           </article>
-
-          <article class="card bg-base-200 shadow">
-            <div class="aspect-square grid place-items-center bg-gradient-to-br from-primary/25 to-base-300">
-              <span class="text-5xl font-black opacity-80">00</span>
+          <article class="player card bg-base-200 overflow-hidden" data-pos="mid">
+            <div class="player-number aspect-square grid place-items-center">
+              <span class="font-display text-7xl font-bold">6</span>
             </div>
-            <div class="card-body p-4">
-              <h3 class="font-bold">A name</h3>
-              <p class="opacity-60 text-sm">Position · Year</p>
+            <div class="card-body p-4 gap-1">
+              <h3 class="font-bold text-lg">A name</h3>
+              <p class="text-sm opacity-80">Midfield · Junior</p>
+            </div>
+          </article>
+          <article class="player card bg-base-200 overflow-hidden" data-pos="def">
+            <div class="player-number aspect-square grid place-items-center">
+              <span class="font-display text-7xl font-bold">4</span>
+            </div>
+            <div class="card-body p-4 gap-1">
+              <h3 class="font-bold text-lg">A name</h3>
+              <p class="text-sm opacity-80">Defense · Senior</p>
+            </div>
+          </article>
+          <article class="player card bg-base-200 overflow-hidden" data-pos="def">
+            <div class="player-number aspect-square grid place-items-center">
+              <span class="font-display text-7xl font-bold">5</span>
+            </div>
+            <div class="card-body p-4 gap-1">
+              <h3 class="font-bold text-lg">A name</h3>
+              <p class="text-sm opacity-80">Defense · Junior</p>
+            </div>
+          </article>
+          <article class="player card bg-base-200 overflow-hidden" data-pos="gk">
+            <div class="player-number aspect-square grid place-items-center">
+              <span class="font-display text-7xl font-bold">1</span>
+            </div>
+            <div class="card-body p-4 gap-1">
+              <h3 class="font-bold text-lg">A name</h3>
+              <p class="text-sm opacity-80">Keeper · Senior</p>
             </div>
           </article>
         </div>
       </section>
 
-      <section>
-        <h2 class="text-2xl font-black uppercase tracking-wide mb-8">Coaches</h2>
+      <section class="mb-24">
+        <h2 class="font-display text-4xl font-bold uppercase mb-8">Coaches</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <article class="card bg-base-200 shadow">
+          <article class="card bg-base-200">
             <div class="card-body">
-              <h3 class="card-title">A name</h3>
-              <p class="opacity-60">Head coach</p>
-              <p class="opacity-70">Two lines. Where they came from, how long they have been here.</p>
+              <div class="flex items-center gap-4 mb-2">
+                <span class="grid place-items-center size-14 rounded-full bg-primary text-primary-content font-display text-xl font-bold shrink-0" aria-hidden="true">AN</span>
+                <div>
+                  <h3 class="card-title">A name</h3>
+                  <p class="text-sm text-primary font-semibold">Head coach</p>
+                </div>
+              </div>
+              <p class="opacity-80">Two lines. Where they came from, how long they have been here.</p>
             </div>
           </article>
-          <article class="card bg-base-200 shadow">
+          <article class="card bg-base-200">
             <div class="card-body">
-              <h3 class="card-title">A name</h3>
-              <p class="opacity-60">Assistant coach</p>
-              <p class="opacity-70">Two lines. Keep all three the same length.</p>
+              <div class="flex items-center gap-4 mb-2">
+                <span class="grid place-items-center size-14 rounded-full bg-neutral text-neutral-content font-display text-xl font-bold shrink-0" aria-hidden="true">AN</span>
+                <div>
+                  <h3 class="card-title">A name</h3>
+                  <p class="text-sm text-primary font-semibold">Assistant coach</p>
+                </div>
+              </div>
+              <p class="opacity-80">Two lines. Keep all three the same length.</p>
             </div>
           </article>
-          <article class="card bg-base-200 shadow">
+          <article class="card bg-base-200">
             <div class="card-body">
-              <h3 class="card-title">A name</h3>
-              <p class="opacity-60">Assistant coach</p>
-              <p class="opacity-70">Two lines. Keep all three the same length.</p>
+              <div class="flex items-center gap-4 mb-2">
+                <span class="grid place-items-center size-14 rounded-full bg-neutral text-neutral-content font-display text-xl font-bold shrink-0" aria-hidden="true">AN</span>
+                <div>
+                  <h3 class="card-title">A name</h3>
+                  <p class="text-sm text-primary font-semibold">Assistant coach</p>
+                </div>
+              </div>
+              <p class="opacity-80">Two lines. Keep all three the same length.</p>
             </div>
           </article>
         </div>
+      </section>
+
+      <!--
+        JOIN US. A team site's second audience is the next season's players.
+        Tell them how to try out, or delete this.
+      -->
+      <section class="rounded-box bg-base-200 p-8 md:p-12 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+        <div class="md:col-span-2">
+          <h2 class="font-display text-3xl md:text-4xl font-bold uppercase mb-3">Want to play?</h2>
+          <p class="opacity-80">When tryouts are, who is eligible, and what to bring. One short paragraph.</p>
+        </div>
+        <a class="btn btn-primary btn-lg md:justify-self-end" href="mailto:coach@example.com"><svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg> Email the coach</a>
       </section>
     </main>
 
-    <footer class="footer sm:footer-horizontal bg-base-300 text-base-content px-6 md:px-10 py-12">
-      <nav>
-        <h2 class="footer-title">Pages</h2>
-        <a class="link link-hover" href="index.html">Home</a>
-        <a class="link link-hover" href="schedule.html">Schedule</a>
-        <a class="link link-hover" href="roster.html">Roster</a>
-      </nav>
-      <nav>
-        <h2 class="footer-title">Contact</h2>
-        <a class="link link-hover" href="mailto:coach@example.com">coach@example.com</a>
-        <span class="opacity-70">Your Field, Your City</span>
-      </nav>
-      <aside>
-        <h2 class="footer-title">Credits</h2>
-        <p class="opacity-70 max-w-xs text-sm">
-          Every image, its creator, source and licence. This page has none yet.
-        </p>
-        <p class="opacity-70 text-sm">© 20XX Your team.</p>
-      </aside>
+    <!--
+      SPONSORS. Names, not grey rectangles labelled "logo". If the team has
+      none, delete the band — an empty "our partners" row reads as a team
+      nobody backs.
+    -->
+    <section class="bg-base-200 border-y border-base-content/10" aria-label="Sponsors">
+      <div class="max-w-6xl mx-auto px-6 py-8 flex flex-wrap items-center justify-center gap-x-12 gap-y-4">
+        <h2 class="text-xs font-bold uppercase tracking-widest w-full sm:w-auto text-center">With thanks to</h2>
+        <span class="font-display text-xl font-bold uppercase opacity-80">Sponsor One</span>
+        <span class="font-display text-xl font-bold uppercase opacity-80">Sponsor Two</span>
+        <span class="font-display text-xl font-bold uppercase opacity-80">Sponsor Three</span>
+        <span class="font-display text-xl font-bold uppercase opacity-80">Sponsor Four</span>
+      </div>
+    </section>
+
+    <footer class="bg-base-300 text-base-content">
+      <div class="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div>
+          <a class="flex items-center gap-3" href="index.html">
+            <span class="grid place-items-center size-10 rounded-lg bg-primary text-primary-content font-display text-xl font-bold">C</span>
+            <span class="font-display text-xl font-bold uppercase tracking-wider">Clubhouse</span>
+          </a>
+          <p class="mt-4 opacity-80 max-w-xs">The sport, the league, the town. One line.</p>
+          <div class="flex gap-2 mt-5">
+            <!-- A social link needs a name a screen reader can say. The icon is not one. -->
+            <a class="btn btn-ghost btn-square btn-sm" href="https://www.instagram.com/" aria-label="Instagram"><svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+            <a class="btn btn-ghost btn-square btn-sm" href="https://www.youtube.com/" aria-label="YouTube"><svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg></a>
+          </div>
+        </div>
+        <nav aria-label="Footer">
+          <h2 class="footer-title">Pages</h2>
+          <ul class="space-y-2">
+            <li><a class="link link-hover" href="index.html">Home</a></li>
+            <li><a class="link link-hover" href="schedule.html">Schedule</a></li>
+            <li><a class="link link-hover" href="roster.html">Roster</a></li>
+            <li><a class="link link-hover" href="schedule.html#tickets">Tickets</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h2 class="footer-title">Contact</h2>
+          <address class="not-italic space-y-2">
+            <p><a class="link link-hover" href="mailto:coach@example.com">coach@example.com</a></p>
+            <p><a class="link link-hover" href="schedule.html#venue">Your Field, Your City</a></p>
+          </address>
+        </div>
+        <!--
+          THE SIGNUP. data-demo means js/site.js catches it and says thank you
+          instead of sending it anywhere. Point `action` at a real service and
+          remove data-demo, or delete this block.
+        -->
+        <form data-demo>
+          <h2 class="footer-title">Game-day reminders</h2>
+          <label class="sr-only" for="news-email">Email address</label>
+          <div class="join w-full">
+            <input class="input join-item w-full" type="email" id="news-email" name="email" required autocomplete="email" placeholder="you@example.com" />
+            <button class="btn btn-primary join-item" type="submit">Sign up</button>
+          </div>
+          <p class="text-sm opacity-80 mt-2">The day before every home game.</p>
+          <p data-sent hidden role="status" tabindex="-1" class="text-sm mt-2 font-semibold">Thanks — see you Friday.</p>
+        </form>
+      </div>
+
+      <!--
+        CREDITS. Every borrowed thing: creator, source, licence, and what you
+        changed. One list for the whole site, the same on every page. When you
+        swap a picture, swap its line. Photographs of minors need more than a
+        credit; ask before you post one.
+      -->
+      <div class="border-t border-base-content/10">
+        <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row md:items-start md:justify-between gap-4 text-sm">
+          <p class="opacity-80">© <span data-year>20XX</span> Your team. Built with daisyUI and Tailwind CSS; icons by Lucide.</p>
+          <details class="md:max-w-xl">
+            <summary class="cursor-pointer link link-hover opacity-80">Photo and video credits</summary>
+            <ul class="mt-3 space-y-1 opacity-80">
+              <li>Hero video: <a class="link" href="https://mango.blender.org/"><em>Tears of Steel</em></a> by Blender Foundation, <a class="link" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</li>
+              <li>Night game: <a class="link" href="https://commons.wikimedia.org/wiki/File:A_night_game_at_Duane_Stadium_at_Merrimack_College.jpg">Kenneth C. Zirkel</a>, Wikimedia Commons, <a class="link" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Cropped.</li>
+              <li>Crowd: <a class="link" href="https://commons.wikimedia.org/wiki/File:Peden_Stadium_at_Night.jpg">NotJamestack</a>, Wikimedia Commons, <a class="link" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Cropped.</li>
+              <li>Ball: <a class="link" href="https://commons.wikimedia.org/wiki/File:Adidas_soccer_ball_on_a_grass_pitch_(Unsplash).jpg">Peter Glaser baraida</a>, Wikimedia Commons, <a class="link" href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>. Cropped.</li>
+              <li>Field: <a class="link" href="https://commons.wikimedia.org/wiki/File:Scudamore_Field_at_NKU_Soccer_Stadium_2024.jpg">Kithira</a>, Wikimedia Commons, <a class="link" href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>. Cropped.</li>
+              <li>Floodlights: <a class="link" href="https://commons.wikimedia.org/wiki/File:Champasak_Stadium_during_at_night_22Jan2026.jpg">AddedUpdatePoster</a>, Wikimedia Commons, <a class="link" href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>. Cropped.</li>
+              <li>Map: © <a class="link" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.</li>
+            </ul>
+          </details>
+        </div>
+      </div>
     </footer>
+
+    <script src="js/site.js"></script>
   </body>
 </html>

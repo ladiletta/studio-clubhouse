@@ -7,23 +7,43 @@
     <meta name="description" content="One sentence about this team. Search results show it; write it." />
 
     <!--
+      SHARING. These are what a link preview shows when somebody pastes your
+      address into a chat. og:image has to be a FULL https address, so it is
+      left out until you publish — then add
+        <meta property="og:image" content="https://you.github.io/your-repo/img/stadium-night.jpg" />
+    -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Clubhouse — change this to your team" />
+    <meta property="og:description" content="One sentence about this team. Search results show it; write it." />
+
+    <!--
       THE THREE TAGS. Tailwind and daisyUI, no build step, nothing installed.
       Open this file with Live Server and start working.
 
       Two honest notes:
-        1. The last tag is Tailwind's BROWSER build. Tailwind's own docs say it
-           is "designed for development purposes only, and is not intended for
+        1. The Tailwind tag is its BROWSER build. Tailwind's own docs say it is
+           "designed for development purposes only, and is not intended for
            production." Fine while you are building. Unit 8 replaces it with a
            real built stylesheet, because publishing to a public address is
            where "development only" stops being acceptable.
-        2. These load from jsdelivr, which means jsdelivr sees a request from
-           every reader of your site. That is your call to make on your own
-           project. Read Unit 8's "what a page costs its reader" first.
+        2. These load from jsdelivr, and the fonts from Google, which means
+           both see a request from every reader of your site. That is your
+           call to make on your own project. Read Unit 8's "what a page costs
+           its reader" first.
+
+      After them: two typefaces from Google Fonts (see TYPE in styles.css), the
+      icon in the browser tab, and your own stylesheet, last, so it wins.
     -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500..700&family=Inter:wght@400..700&display=swap" rel="stylesheet" />
+
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0f172a" />
     <link rel="stylesheet" href="styles.css" />
   </head>
 
@@ -36,26 +56,43 @@
       This ships as `night`. A team site wants a theme that can carry one loud
       colour: try `sunset`, `synthwave`, `dracula`, `forest`, `business`,
       `dim`, `black`. Do it before you write a word.
-    -->
 
-    <!-- ============================================================== NAV -->
-    <nav class="navbar bg-base-100/80 backdrop-blur sticky top-0 z-30 px-4 md:px-8">
-      <div class="navbar-start gap-3">
+      THE NAV IS COPIED onto every page, and that is a real cost of plain
+      HTML: three pages, three copies, and they drift. Change one, change all
+      three. Unit 8's build step is the fix; until then, a habit is.
+
+      Two copies of the links live inside it: a row for wide screens and a
+      <details> dropdown for phones. <details> opens and closes with no
+      JavaScript at all; js/site.js only adds "close when I tap away".
+    -->
+    <a class="skip-link btn btn-primary" href="#main">Skip to content</a>
+
+    <nav class="navbar bg-base-100/85 backdrop-blur sticky top-0 z-30 px-4 md:px-8 border-b border-base-content/10" aria-label="Main">
+      <div class="navbar-start">
         <!--
           THE MARK. A monogram in a coloured square is a real logo move and it
           costs nothing — swap it for the logo package you build in Unit 5.
         -->
         <a class="flex items-center gap-3" href="index.html">
-          <span class="grid place-items-center size-9 rounded bg-primary text-primary-content font-black">
-            C
-          </span>
-          <span class="text-lg font-black uppercase tracking-wider">Clubhouse</span>
+          <span class="grid place-items-center size-10 rounded-lg bg-primary text-primary-content font-display text-xl font-bold">C</span>
+          <span class="font-display text-xl font-bold uppercase tracking-wider">Clubhouse</span>
         </a>
       </div>
-      <div class="navbar-end gap-1 md:gap-3">
-        <a class="link link-hover hidden sm:inline" href="schedule.html">Schedule</a>
-        <a class="link link-hover hidden sm:inline" href="roster.html">Roster</a>
-        <a class="btn btn-primary btn-sm md:btn-md" href="schedule.html#tickets">Get tickets</a>
+      <div class="navbar-end gap-2">
+        <ul class="menu menu-horizontal hidden md:flex gap-1 text-base">
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="roster.html">Roster</a></li>
+        </ul>
+        <a class="btn btn-primary btn-sm md:btn-md" href="schedule.html#tickets"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg> Get tickets</a>
+        <details class="dropdown dropdown-end md:hidden">
+          <summary class="btn btn-ghost btn-square" aria-label="Site pages"><svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg></summary>
+          <ul class="menu dropdown-content bg-base-200 rounded-box z-40 mt-3 w-56 p-2 shadow-xl text-base">
+            <li><a href="index.html" aria-current="page">Home</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="roster.html">Roster</a></li>
+          </ul>
+        </details>
       </div>
     </nav>
 
@@ -64,30 +101,32 @@
       A YOUTUBE BACKGROUND with a card sitting on top of it, and the parts are
       worth understanding before you change them:
 
-        - The gradient behind everything is in styles.css (.hero-poster). It is
-          always painted. If YouTube is blocked on this network — plenty of
-          schools block it — the page still looks deliberate.
-        - js/hero-video.js checks whether YouTube is reachable BEFORE putting an
-          iframe on the page, uses the video's own thumbnail as the poster, then
-          adds the video. It skips the video on phones and for readers whose
-          system asks for reduced motion.
+        - The photograph behind everything is in styles.css (.hero-poster).
+          It is always painted. If YouTube is blocked on this network — plenty
+          of schools block it — the page still looks finished.
+        - js/hero-video.js checks whether YouTube is reachable BEFORE putting
+          an iframe on the page, then fades the video in over the photograph.
+          It skips the video on phones and for readers whose system asks for
+          reduced motion.
         - data-video is the id out of a YouTube URL. In
           youtube.com/watch?v=R6MlUcmOul8 the id is R6MlUcmOul8. Swap it for
           your own highlight reel, then fix the credit in the footer.
         - The scrim (.hero-scrim) is what keeps the headline readable over
           moving pictures. Text on video without one is a coin flip every frame.
     -->
-    <header class="hero-stage relative min-h-[75vh] md:min-h-[88vh] flex items-end">
+    <header class="hero-stage min-h-[80vh] md:min-h-[90vh] flex items-end">
       <div class="hero-poster" data-video="R6MlUcmOul8" data-hero-video></div>
       <div class="hero-scrim"></div>
 
-      <div class="relative z-10 w-full px-6 pt-32 pb-0 md:pt-40">
-        <div class="max-w-6xl mx-auto">
-          <p class="badge badge-primary badge-lg mb-6 uppercase tracking-widest">20XX season</p>
-          <h1 class="text-5xl md:text-8xl font-black uppercase leading-[0.95] tracking-tight text-white mb-6 max-w-4xl">
+      <div class="relative z-10 w-full px-6 pt-32 md:pt-40">
+        <div class="max-w-6xl mx-auto text-white">
+          <p class="inline-flex items-center gap-2 rounded-full bg-primary text-primary-content px-4 py-1.5 text-sm font-bold uppercase tracking-widest mb-6">
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2"/><path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2"/><path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3"/><path d="M4 22h16"/><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"/><path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3"/></svg> 20XX season
+          </p>
+          <h1 class="font-display text-6xl md:text-9xl font-bold uppercase leading-[0.9] tracking-tight mb-6 max-w-4xl">
             Your team<br />name here
           </h1>
-          <p class="text-lg md:text-xl text-white/90 max-w-xl mb-10">
+          <p class="text-lg md:text-xl max-w-xl mb-10">
             One sentence. The sport, the league, the town. Not "a tradition of
             excellence" — say who you actually play and where.
           </p>
@@ -96,159 +135,316 @@
             THE NEXT GAME CARD overlaps the bottom edge of the hero on purpose.
             That overlap is the whole visual idea here: one element crossing the
             boundary between two sections makes a page look designed rather than
-            stacked. -mb-* pulls it down into the section below.
+            stacked. -mb-* pulls it down into the section below, and the pt-* on
+            that section makes room for it. Change one, check the other.
           -->
-          <div class="card bg-base-100 shadow-2xl max-w-3xl -mb-16 md:-mb-20">
-            <div class="card-body flex-col sm:flex-row sm:items-center gap-6">
-              <div class="flex-1">
-                <p class="text-xs font-bold uppercase tracking-widest text-primary mb-1">Next game</p>
-                <p class="text-2xl font-black">vs. Opponent</p>
-                <!--
-                  <time> with a machine-readable datetime. It costs one
-                  attribute and it is what lets anything else — a search engine,
-                  a calendar, a script you write later — know this is a date.
-                -->
-                <p class="opacity-70">
-                  <time datetime="20XX-10-04T19:00">Friday, October 4 · 7:00pm</time> ·
-                  Home
-                </p>
+          <div class="card bg-base-100 text-base-content shadow-2xl max-w-4xl -mb-20 md:-mb-24">
+            <div class="card-body gap-6 md:flex-row md:items-center">
+              <div class="flex items-center gap-4 flex-1">
+                <!-- Two crests facing off. Swap the letters for real badges once you have the right to use them. -->
+                <span class="grid place-items-center size-14 rounded-full bg-primary text-primary-content font-display text-2xl font-bold shrink-0" aria-hidden="true">C</span>
+                <span class="font-display text-xl font-bold opacity-80" aria-hidden="true">vs</span>
+                <span class="grid place-items-center size-14 rounded-full bg-neutral text-neutral-content font-display text-2xl font-bold shrink-0" aria-hidden="true">O</span>
+                <div class="ml-2">
+                  <p class="text-xs font-bold uppercase tracking-widest text-primary mb-1">Next game · Home</p>
+                  <p class="font-display text-2xl md:text-3xl font-bold uppercase">vs. Opponent</p>
+                  <!--
+                    <time> with a machine-readable datetime. It costs one
+                    attribute and it is what lets anything else — a search
+                    engine, a calendar, a script you write later — know this is
+                    a date.
+                  -->
+                  <p class="opacity-80"><time datetime="20XX-10-04T19:00">Friday, October 4 · 7:00pm</time></p>
+                </div>
               </div>
-              <a class="btn btn-primary btn-lg" href="schedule.html#tickets">Get tickets</a>
+              <a class="btn btn-primary btn-lg" href="schedule.html#tickets"><svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg> Get tickets</a>
             </div>
           </div>
         </div>
       </div>
     </header>
 
-    <!--
-      ============================================================== RECORD
-      daisyUI's `stats` component. Three numbers, and they should be the three a
-      fan actually asks for. A number nobody asked for is decoration.
-    -->
-    <section class="px-6 pt-28 md:pt-32 pb-20 max-w-6xl mx-auto">
-      <div class="stats stats-vertical sm:stats-horizontal shadow w-full bg-base-200">
-        <div class="stat">
-          <div class="stat-title">Record</div>
-          <div class="stat-value text-primary">0–0</div>
-          <div class="stat-desc">Overall, 20XX</div>
+    <main id="main">
+      <!--
+        ============================================================ RECORD
+        daisyUI's `stats` component. Three numbers, and they should be the
+        three a fan actually asks for. A number nobody asked for is decoration.
+      -->
+      <section class="px-6 pt-32 md:pt-36 pb-20 max-w-6xl mx-auto" aria-label="Season record">
+        <div class="stats stats-vertical sm:stats-horizontal shadow w-full bg-base-200">
+          <div class="stat">
+            <div class="stat-figure text-primary"><svg class="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2"/><path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2"/><path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3"/><path d="M4 22h16"/><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"/><path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3"/></svg></div>
+            <div class="stat-title opacity-100">Record</div>
+            <div class="stat-value font-display text-primary">0–0</div>
+            <div class="stat-desc opacity-100">Overall, 20XX</div>
+          </div>
+          <div class="stat">
+            <div class="stat-figure text-primary"><svg class="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg></div>
+            <div class="stat-title opacity-100">Conference</div>
+            <div class="stat-value font-display">0–0</div>
+            <div class="stat-desc opacity-100">Where that puts you</div>
+          </div>
+          <div class="stat">
+            <div class="stat-figure text-primary"><svg class="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"/></svg></div>
+            <div class="stat-title opacity-100">Streak</div>
+            <div class="stat-value font-display">W0</div>
+            <div class="stat-desc opacity-100">Since a date</div>
+          </div>
         </div>
-        <div class="stat">
-          <div class="stat-title">Conference</div>
-          <div class="stat-value">0–0</div>
-          <div class="stat-desc">Where that puts you</div>
-        </div>
-        <div class="stat">
-          <div class="stat-title">Streak</div>
-          <div class="stat-value">W0</div>
-          <div class="stat-desc">Since a date</div>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!--
-      ============================================================== FIXTURES
-      Three upcoming games. The full list lives on schedule.html — a home page
-      that tries to be every page ends up being none of them.
-    -->
-    <section class="bg-base-200 border-y border-base-300">
-      <div class="max-w-6xl mx-auto px-6 py-20 md:py-24">
-        <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
-          <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tight">Coming up</h2>
-          <a class="link link-primary font-bold" href="schedule.html">Full schedule</a>
-        </div>
+      <!--
+        ============================================================ FIXTURES
+        Upcoming games on the left, the last results on the right. The full
+        list lives on schedule.html — a home page that tries to be every page
+        ends up being none of them.
+      -->
+      <section class="bg-base-200 border-y border-base-content/10">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-24 grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div class="lg:col-span-2">
+            <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+              <h2 class="font-display text-4xl md:text-5xl font-bold uppercase">Coming up</h2>
+              <a class="link link-primary font-bold inline-flex items-center gap-1" href="schedule.html">Full schedule <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+            </div>
+            <ol class="space-y-3">
+              <li class="flex items-center gap-5 rounded-box bg-base-100 p-4">
+                <div class="text-center w-14 shrink-0">
+                  <p class="text-xs font-bold uppercase">Oct</p>
+                  <p class="font-display text-3xl font-bold leading-none">4</p>
+                </div>
+                <div class="flex-1">
+                  <p class="font-bold text-lg">vs. Opponent</p>
+                  <p class="text-sm opacity-80"><time datetime="20XX-10-04T19:00">Fri · 7:00pm</time> · Your Field</p>
+                </div>
+                <span class="badge badge-primary">Home</span>
+              </li>
+              <li class="flex items-center gap-5 rounded-box bg-base-100 p-4">
+                <div class="text-center w-14 shrink-0">
+                  <p class="text-xs font-bold uppercase">Oct</p>
+                  <p class="font-display text-3xl font-bold leading-none">11</p>
+                </div>
+                <div class="flex-1">
+                  <p class="font-bold text-lg">at Opponent</p>
+                  <p class="text-sm opacity-80"><time datetime="20XX-10-11T19:00">Fri · 7:00pm</time> · Their Field</p>
+                </div>
+                <span class="badge badge-outline">Away</span>
+              </li>
+              <li class="flex items-center gap-5 rounded-box bg-base-100 p-4">
+                <div class="text-center w-14 shrink-0">
+                  <p class="text-xs font-bold uppercase">Oct</p>
+                  <p class="font-display text-3xl font-bold leading-none">18</p>
+                </div>
+                <div class="flex-1">
+                  <p class="font-bold text-lg">vs. Opponent</p>
+                  <p class="text-sm opacity-80"><time datetime="20XX-10-18T19:00">Fri · 7:00pm</time> · Your Field</p>
+                </div>
+                <span class="badge badge-primary">Home</span>
+              </li>
+            </ol>
+          </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <article class="card bg-base-100 shadow">
+          <!--
+            A COLOUR-ONLY BADGE IS NOT ENOUGH. The results say "W" and "L" as
+            well as being green and red, because about one boy in twelve cannot
+            tell those two colours apart. Keep the letter.
+          -->
+          <div>
+            <h2 class="font-display text-4xl md:text-5xl font-bold uppercase mb-8">Results</h2>
+            <ol class="divide-y divide-base-content/10 rounded-box bg-base-100">
+              <li class="flex items-center justify-between gap-4 p-4">
+                <div>
+                  <p class="font-bold">vs. Opponent</p>
+                  <p class="text-sm opacity-80"><time datetime="20XX-09-27">Sep 27</time></p>
+                </div>
+                <span class="badge badge-success font-bold">W 00–00</span>
+              </li>
+              <li class="flex items-center justify-between gap-4 p-4">
+                <div>
+                  <p class="font-bold">at Opponent</p>
+                  <p class="text-sm opacity-80"><time datetime="20XX-09-20">Sep 20</time></p>
+                </div>
+                <span class="badge badge-error font-bold">L 00–00</span>
+              </li>
+              <li class="flex items-center justify-between gap-4 p-4">
+                <div>
+                  <p class="font-bold">vs. Opponent</p>
+                  <p class="text-sm opacity-80"><time datetime="20XX-09-13">Sep 13</time></p>
+                </div>
+                <span class="badge badge-success font-bold">W 00–00</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!--
+        ============================================================ NEWS
+        Three stories, parallel: same shape, same length, a photo each. A
+        team page that has not been updated since August tells a visitor the
+        season is over. Date every story, and keep them honest.
+      -->
+      <section class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+        <h2 class="font-display text-4xl md:text-5xl font-bold uppercase mb-10">Latest</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <article class="card bg-base-200 overflow-hidden group">
+            <figure class="aspect-[16/10] overflow-hidden">
+              <img class="size-full object-cover transition duration-500 group-hover:scale-105" src="img/ball.jpg" width="900" height="563" loading="lazy" alt="A match ball resting on the grass" />
+            </figure>
             <div class="card-body">
-              <p class="text-xs font-bold uppercase tracking-widest opacity-60">Home</p>
-              <h3 class="card-title text-2xl">vs. Opponent</h3>
-              <p class="opacity-70"><time datetime="20XX-10-04T19:00">Oct 4 · 7:00pm</time></p>
+              <p class="text-xs font-bold uppercase tracking-widest text-primary"><time datetime="20XX-09-28">Sep 28</time> · Match report</p>
+              <h3 class="card-title text-xl">A headline that says what happened</h3>
+              <p class="opacity-80">Two sentences. The score, the moment, and who made it.</p>
             </div>
           </article>
-          <article class="card bg-base-100 shadow">
+          <article class="card bg-base-200 overflow-hidden group">
+            <figure class="aspect-[16/10] overflow-hidden">
+              <img class="size-full object-cover transition duration-500 group-hover:scale-105" src="img/field.jpg" width="900" height="562" loading="lazy" alt="The home field from the stands on a clear evening" />
+            </figure>
             <div class="card-body">
-              <p class="text-xs font-bold uppercase tracking-widest opacity-60">Away</p>
-              <h3 class="card-title text-2xl">at Opponent</h3>
-              <p class="opacity-70"><time datetime="20XX-10-11T19:00">Oct 11 · 7:00pm</time></p>
+              <p class="text-xs font-bold uppercase tracking-widest text-primary"><time datetime="20XX-09-22">Sep 22</time> · Club news</p>
+              <h3 class="card-title text-xl">A headline that says what changed</h3>
+              <p class="opacity-80">Two sentences. What is different now, and for whom.</p>
             </div>
           </article>
-          <article class="card bg-base-100 shadow">
+          <article class="card bg-base-200 overflow-hidden group">
+            <figure class="aspect-[16/10] overflow-hidden">
+              <img class="size-full object-cover transition duration-500 group-hover:scale-105" src="img/floodlights.jpg" width="900" height="562" loading="lazy" alt="An empty pitch under floodlights at night" />
+            </figure>
             <div class="card-body">
-              <p class="text-xs font-bold uppercase tracking-widest opacity-60">Home</p>
-              <h3 class="card-title text-2xl">vs. Opponent</h3>
-              <p class="opacity-70"><time datetime="20XX-10-18T19:00">Oct 18 · 7:00pm</time></p>
+              <p class="text-xs font-bold uppercase tracking-widest text-primary"><time datetime="20XX-09-15">Sep 15</time> · Community</p>
+              <h3 class="card-title text-xl">A headline about the people around the team</h3>
+              <p class="opacity-80">Two sentences. Boosters, alumni, the town.</p>
             </div>
           </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!--
-      ============================================================== STORY
-      Text one side, picture the other. On a phone it stacks with the text
-      first — a picture you have not been told the point of is just a picture.
-    -->
-    <section class="max-w-6xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-      <div class="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/30 to-base-300 shadow-xl order-last md:order-first"></div>
-      <div>
-        <p class="text-primary font-bold uppercase tracking-widest text-xs mb-3">The program</p>
-        <h2 class="text-3xl md:text-4xl font-black mb-6">What this team is about</h2>
-        <p class="opacity-70 mb-4">
-          A paragraph about the people. Who coaches, how long they have been
-          here, what they are stubborn about.
-        </p>
-        <p class="opacity-70 mb-8">
-          A second paragraph, shorter. End on something specific — a rivalry, a
-          record, the year everything changed.
-        </p>
-        <a class="btn btn-outline" href="roster.html">Meet the roster</a>
-      </div>
-    </section>
+      <!--
+        ============================================================ STORY
+        Picture one side, text the other. On a phone it stacks with the text
+        first — a picture you have not been told the point of is just a picture.
+      -->
+      <section class="bg-base-200 border-t border-base-content/10">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+          <img class="rounded-box shadow-2xl w-full aspect-[4/3] object-cover order-last md:order-first" src="img/crowd.jpg" width="1200" height="900" loading="lazy" alt="A full home stand under the lights on game night" />
+          <div>
+            <p class="text-primary font-bold uppercase tracking-widest text-xs mb-3">The program</p>
+            <h2 class="font-display text-4xl md:text-5xl font-bold uppercase mb-6">What this team is about</h2>
+            <p class="opacity-80 mb-4 text-lg">
+              A paragraph about the people. Who coaches, how long they have been
+              here, what they are stubborn about.
+            </p>
+            <p class="opacity-80 mb-8">
+              A second paragraph, shorter. End on something specific — a rivalry,
+              a record, the year everything changed.
+            </p>
+            <a class="btn btn-outline" href="roster.html"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg> Meet the roster</a>
+          </div>
+        </div>
+      </section>
 
-    <!--
-      ============================================================== THE ASK
-      Same ask as the hero, not a new one. A page with two different requests
-      has not decided what it wants.
-    -->
+      <!--
+        ============================================================ THE ASK
+        Same ask as the hero, not a new one. A page with two different
+        requests has not decided what it wants.
+      -->
     <section class="bg-primary text-primary-content px-6 py-20 md:py-24">
       <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-3xl md:text-5xl font-black uppercase mb-6">Be there Friday</h2>
-        <p class="opacity-90 mb-8 text-lg">
-          One sentence. Where to park, what it costs, when the doors open.
-        </p>
-        <a class="btn btn-lg" href="schedule.html#tickets">Get tickets</a>
+        <h2 class="font-display text-4xl md:text-6xl font-bold uppercase mb-6">Be there Friday</h2>
+        <p class="mb-8 text-lg">One sentence. Where to park, what it costs, when the doors open.</p>
+        <a class="btn btn-lg btn-neutral" href="schedule.html#tickets">Get tickets</a>
+      </div>
+    </section>
+    </main>
+
+    <!--
+      SPONSORS. Names, not grey rectangles labelled "logo". If the team has
+      none, delete the band — an empty "our partners" row reads as a team
+      nobody backs.
+    -->
+    <section class="bg-base-200 border-y border-base-content/10" aria-label="Sponsors">
+      <div class="max-w-6xl mx-auto px-6 py-8 flex flex-wrap items-center justify-center gap-x-12 gap-y-4">
+        <h2 class="text-xs font-bold uppercase tracking-widest w-full sm:w-auto text-center">With thanks to</h2>
+        <span class="font-display text-xl font-bold uppercase opacity-80">Sponsor One</span>
+        <span class="font-display text-xl font-bold uppercase opacity-80">Sponsor Two</span>
+        <span class="font-display text-xl font-bold uppercase opacity-80">Sponsor Three</span>
+        <span class="font-display text-xl font-bold uppercase opacity-80">Sponsor Four</span>
       </div>
     </section>
 
-    <!-- ============================================================ FOOTER -->
-    <footer class="footer sm:footer-horizontal bg-base-300 text-base-content px-6 md:px-10 py-12">
-      <nav>
-        <h2 class="footer-title">Pages</h2>
-        <a class="link link-hover" href="index.html">Home</a>
-        <a class="link link-hover" href="schedule.html">Schedule</a>
-        <a class="link link-hover" href="roster.html">Roster</a>
-      </nav>
-      <nav>
-        <h2 class="footer-title">Contact</h2>
-        <a class="link link-hover" href="mailto:coach@example.com">coach@example.com</a>
-        <span class="opacity-70">Your Field, Your City</span>
-      </nav>
-      <aside>
-        <h2 class="footer-title">Credits</h2>
+    <footer class="bg-base-300 text-base-content">
+      <div class="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div>
+          <a class="flex items-center gap-3" href="index.html">
+            <span class="grid place-items-center size-10 rounded-lg bg-primary text-primary-content font-display text-xl font-bold">C</span>
+            <span class="font-display text-xl font-bold uppercase tracking-wider">Clubhouse</span>
+          </a>
+          <p class="mt-4 opacity-80 max-w-xs">The sport, the league, the town. One line.</p>
+          <div class="flex gap-2 mt-5">
+            <!-- A social link needs a name a screen reader can say. The icon is not one. -->
+            <a class="btn btn-ghost btn-square btn-sm" href="https://www.instagram.com/" aria-label="Instagram"><svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+            <a class="btn btn-ghost btn-square btn-sm" href="https://www.youtube.com/" aria-label="YouTube"><svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg></a>
+          </div>
+        </div>
+        <nav aria-label="Footer">
+          <h2 class="footer-title">Pages</h2>
+          <ul class="space-y-2">
+            <li><a class="link link-hover" href="index.html">Home</a></li>
+            <li><a class="link link-hover" href="schedule.html">Schedule</a></li>
+            <li><a class="link link-hover" href="roster.html">Roster</a></li>
+            <li><a class="link link-hover" href="schedule.html#tickets">Tickets</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h2 class="footer-title">Contact</h2>
+          <address class="not-italic space-y-2">
+            <p><a class="link link-hover" href="mailto:coach@example.com">coach@example.com</a></p>
+            <p><a class="link link-hover" href="schedule.html#venue">Your Field, Your City</a></p>
+          </address>
+        </div>
         <!--
-          EVERY borrowed thing goes here: creator, source, licence. The hero
-          video shipped with this starter is credited below — when you swap the
-          id, swap this line for your own footage's credit. Photographs of
-          minors need more than a credit; ask before you post one.
+          THE SIGNUP. data-demo means js/site.js catches it and says thank you
+          instead of sending it anywhere. Point `action` at a real service and
+          remove data-demo, or delete this block.
         -->
-        <p class="opacity-70 max-w-xs text-sm">
-          Hero video: <em>Tears of Steel</em> by Blender Foundation, CC BY 3.0.
-          Replace it with your own and replace this line with its credit.
-        </p>
-        <p class="opacity-70 text-sm">© 20XX Your team.</p>
-      </aside>
+        <form data-demo>
+          <h2 class="footer-title">Game-day reminders</h2>
+          <label class="sr-only" for="news-email">Email address</label>
+          <div class="join w-full">
+            <input class="input join-item w-full" type="email" id="news-email" name="email" required autocomplete="email" placeholder="you@example.com" />
+            <button class="btn btn-primary join-item" type="submit">Sign up</button>
+          </div>
+          <p class="text-sm opacity-80 mt-2">The day before every home game.</p>
+          <p data-sent hidden role="status" tabindex="-1" class="text-sm mt-2 font-semibold">Thanks — see you Friday.</p>
+        </form>
+      </div>
+
+      <!--
+        CREDITS. Every borrowed thing: creator, source, licence, and what you
+        changed. One list for the whole site, the same on every page. When you
+        swap a picture, swap its line. Photographs of minors need more than a
+        credit; ask before you post one.
+      -->
+      <div class="border-t border-base-content/10">
+        <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row md:items-start md:justify-between gap-4 text-sm">
+          <p class="opacity-80">© <span data-year>20XX</span> Your team. Built with daisyUI and Tailwind CSS; icons by Lucide.</p>
+          <details class="md:max-w-xl">
+            <summary class="cursor-pointer link link-hover opacity-80">Photo and video credits</summary>
+            <ul class="mt-3 space-y-1 opacity-80">
+              <li>Hero video: <a class="link" href="https://mango.blender.org/"><em>Tears of Steel</em></a> by Blender Foundation, <a class="link" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</li>
+              <li>Night game: <a class="link" href="https://commons.wikimedia.org/wiki/File:A_night_game_at_Duane_Stadium_at_Merrimack_College.jpg">Kenneth C. Zirkel</a>, Wikimedia Commons, <a class="link" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Cropped.</li>
+              <li>Crowd: <a class="link" href="https://commons.wikimedia.org/wiki/File:Peden_Stadium_at_Night.jpg">NotJamestack</a>, Wikimedia Commons, <a class="link" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Cropped.</li>
+              <li>Ball: <a class="link" href="https://commons.wikimedia.org/wiki/File:Adidas_soccer_ball_on_a_grass_pitch_(Unsplash).jpg">Peter Glaser baraida</a>, Wikimedia Commons, <a class="link" href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>. Cropped.</li>
+              <li>Field: <a class="link" href="https://commons.wikimedia.org/wiki/File:Scudamore_Field_at_NKU_Soccer_Stadium_2024.jpg">Kithira</a>, Wikimedia Commons, <a class="link" href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>. Cropped.</li>
+              <li>Floodlights: <a class="link" href="https://commons.wikimedia.org/wiki/File:Champasak_Stadium_during_at_night_22Jan2026.jpg">AddedUpdatePoster</a>, Wikimedia Commons, <a class="link" href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>. Cropped.</li>
+              <li>Map: © <a class="link" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.</li>
+            </ul>
+          </details>
+        </div>
+      </div>
     </footer>
 
+    <script src="js/site.js"></script>
     <script src="js/hero-video.js"></script>
   </body>
 </html>

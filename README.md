@@ -19,6 +19,7 @@ styles.css         your palette, your type, the hero video, the filters
 js/hero-video.js   the video, and what happens when YouTube is blocked
 js/site.js         the phone menu, the footer year, and the demo signup
 img/               the photographs, and favicon.svg (the icon in the browser tab)
+AGENTS.md          what AI help may and may not do on this project
 ```
 
 ## Start here
@@ -151,6 +152,8 @@ have them found.
 - [ ] The hero still looks deliberate with the video blocked. Turn wifi off and
       reload.
 - [ ] If you used AI to generate any part of this, say so and say which part.
+      AI help on this project follows `AGENTS.md`: a tutor until your final
+      draft is done, then a hand with the polish.
 - [ ] It works from a fresh clone — no absolute paths to your own disk.
 - [ ] It is **pushed**.
 
